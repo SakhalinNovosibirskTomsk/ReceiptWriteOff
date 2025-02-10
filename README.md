@@ -53,3 +53,11 @@
 
 ### Сервис Аутентификации и Авторизации может:
 + Добавить и удалить пользователя с ролью Библиотекарь или Администратор
+
+
+## Диаграмма вариантов использования сервиса ReceiptWriteOff
+
+[![Диаграмма вариантов использования сервиса ReceiptWriteOff](https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff/blob/main/Docs/Use%20cases%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20ReceiptWriteOff.png)](https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff/blob/main/Docs/Use%20cases%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20ReceiptWriteOff.png)
+[Ссылка на картинку](https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff/blob/main/Docs/Use%20cases%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20ReceiptWriteOff.png)
+
+[Ссылка на исходник схемы](https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff/blob/main/Docs/Use%20cases%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20ReceiptWriteOff.drawio)
