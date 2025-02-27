@@ -74,3 +74,13 @@
 [Ссылка на картинку](https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff/blob/main/Docs/ER-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D0%91%D0%94%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20ReceiptWriteOff.drawio.png)
 
 [Ссылка на исходник схемы](https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff/blob/main/Docs/ER-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D0%91%D0%94%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20ReceiptWriteOff.drawio)
+
+### Табличное описание
+
+##### Users - пользователи
+
+| Ключ                    | Наименование   | тип              | Описание                              | внеш. ключ              | Доп инфо                                                            |
+| ----------------------- | -------------- | ---------------- | ------------------------------------- | ----------------------- | ------------------------------------------------------------------- |
+| <center>**PK**</center> | **Id**         | int              | ID пользователя                       |                         | not null, autoincrement                                             |
+|                         | **FullName**   | nvarchar(300)    | Имя пользователя                      |                         | not null                                                            |
+|                         | **UserId**     | nvarchar(100)    | ID пользователя в сервисе ААиР        | <center>**FK**</center> | not null                                                            |
