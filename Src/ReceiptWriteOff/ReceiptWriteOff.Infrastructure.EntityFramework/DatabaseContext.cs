@@ -1,0 +1,38 @@
+using Microsoft.EntityFrameworkCore;
+using ReceiptWriteOff.Domain.Entities;
+
+namespace ReceiptWriteOff.Infrastructure.EntityFramework;
+
+public class DatabaseContext : DbContext
+{
+    public DbSet<Book> Books { get; set; }
+    public DbSet<BookInstance> BookInstances { get; set; }
+    public DbSet<ReceiptFact> ReceiptFacts { get; set; }
+    public DbSet<WriteOffFact> WriteOffFacts { get; set; }
+    public DbSet<WriteOffReason> WriteOffReasons { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<BookInstance>()
+            .HasOne(bi => bi.Book)
+            .WithMany(b => b.BookInstances)
+            .HasForeignKey(bi => bi.BookId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ReceiptFact>()
+            .HasOne(rf => rf.BookInstance)
+            .WithOne(bi => bi.ReceiptFact)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<WriteOffFact>()
+            .HasOne(wf => wf.BookInstance)
+            .WithOne(bi => bi.WriteOffFact)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<WriteOffFact>()
+            .HasOne(wf => wf.WriteOffReason)
+            .WithMany(wr => wr.WriteOffFacts)
+            .HasForeignKey(wf => wf.WriteOffReasonId)
+            .OnDelete(DeleteBehavior.Restrict);
+    }
+}
