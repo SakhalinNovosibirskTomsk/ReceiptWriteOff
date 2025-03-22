@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ReceiptWriteOff.Domain.Entities.Abstractions\ReceiptWriteOff.Domain.Entities.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

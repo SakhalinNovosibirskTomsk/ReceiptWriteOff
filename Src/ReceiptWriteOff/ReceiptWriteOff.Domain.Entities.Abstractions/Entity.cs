@@ -1,4 +1,4 @@
-namespace ReceiptWriteOff.Domain.Entities;
+namespace ReceiptWriteOff.Domain.Entities.Abstractions;
 
 public abstract class Entity : IEntity<int>
 {

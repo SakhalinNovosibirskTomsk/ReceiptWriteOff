@@ -1,3 +1,5 @@
+using ReceiptWriteOff.Domain.Entities.Abstractions;
+
 namespace ReceiptWriteOff.Domain.Entities;
 
 public class ReceiptFact : Entity

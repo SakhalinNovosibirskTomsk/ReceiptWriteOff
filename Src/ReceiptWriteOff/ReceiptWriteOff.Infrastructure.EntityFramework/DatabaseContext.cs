@@ -13,6 +13,10 @@ public class DatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Book>().Property(bi => bi.Title).HasMaxLength(1000);
+        modelBuilder.Entity<Book>().Property(bi => bi.Author).HasMaxLength(500);
+        
+        modelBuilder.Entity<BookInstance>().Property(bi => bi.InventoryNumber).HasMaxLength(100);
         modelBuilder.Entity<BookInstance>()
             .HasOne(bi => bi.Book)
             .WithMany(b => b.BookInstances)
@@ -34,5 +38,7 @@ public class DatabaseContext : DbContext
             .WithMany(wr => wr.WriteOffFacts)
             .HasForeignKey(wf => wf.WriteOffReasonId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        modelBuilder.Entity<WriteOffReason>().Property(bi => bi.Description).HasMaxLength(500);
     }
 }
