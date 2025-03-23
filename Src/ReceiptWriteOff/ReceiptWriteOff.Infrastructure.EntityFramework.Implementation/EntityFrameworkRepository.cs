@@ -1,18 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReceiptWriteOff.Domain.Entities.Abstractions;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 
 namespace ReceiptWriteOff.Infrastructure.EntityFramework;
 
-public class EfRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> 
+public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
     where TEntity : class, IEntity<TPrimaryKey> 
     where TPrimaryKey : struct
 {
-    private readonly DatabaseContext _databaseContext;
+    private readonly IDatabaseContext _databaseContext;
     private readonly DbSet<TEntity> _entitySet;
     
-    public EfRepository(DatabaseContext databaseContext)
+    public EntityFrameworkRepository(IDatabaseContext databaseContext)
     {
         _databaseContext = databaseContext;
         _entitySet = _databaseContext.Set<TEntity>();

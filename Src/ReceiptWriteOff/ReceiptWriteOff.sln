@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9D5846
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{077120E9-CB28-48B2-B501-7810E9FA3566}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework", "ReceiptWriteOff.Infrastructure.EntityFramework\ReceiptWriteOff.Infrastructure.EntityFramework.csproj", "{2CF7C988-0054-49BD-98A9-05C5906A7503}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.Implementation", "ReceiptWriteOff.Infrastructure.EntityFramework.Implementation\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.csproj", "{2CF7C988-0054-49BD-98A9-05C5906A7503}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.Repositories.Implementation", "ReceiptWriteOff.Infrastructure.Repositories.Implementation\ReceiptWriteOff.Infrastructure.Repositories.Implementation.csproj", "{1AC8F08D-46BD-4D02-A993-064C03EA1E18}"
 EndProject
@@ -29,6 +29,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Implementations", "ReceiptWriteOff.Services.Implementations\ReceiptWriteOff.Services.Implementations.csproj", "{58117DAB-21E2-4C29-9BC7-B1F9294FB4A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Domain.Entities.Abstractions", "ReceiptWriteOff.Domain.Entities.Abstractions\ReceiptWriteOff.Domain.Entities.Abstractions.csproj", "{E5C263F3-1191-408F-B86E-0F23A7429F41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36B33E68-DC91-4EFB-89CA-8A15FE94618C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests", "ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests\ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.csproj", "{736872EB-30A3-48F6-8903-8C40F72B48DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions", "ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions\ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions.csproj", "{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +78,14 @@ Global
 		{E5C263F3-1191-408F-B86E-0F23A7429F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C263F3-1191-408F-B86E-0F23A7429F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C263F3-1191-408F-B86E-0F23A7429F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{736872EB-30A3-48F6-8903-8C40F72B48DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736872EB-30A3-48F6-8903-8C40F72B48DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736872EB-30A3-48F6-8903-8C40F72B48DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736872EB-30A3-48F6-8903-8C40F72B48DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CF7C988-0054-49BD-98A9-05C5906A7503} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
@@ -83,5 +97,7 @@ Global
 		{DA2B54B6-116F-4A97-9C24-5B384D74BE2B} = {6FC13982-33B3-4A14-A2BA-5502615CE1DB}
 		{58117DAB-21E2-4C29-9BC7-B1F9294FB4A8} = {6FC13982-33B3-4A14-A2BA-5502615CE1DB}
 		{E5C263F3-1191-408F-B86E-0F23A7429F41} = {9D58465A-6BC8-43B3-89EA-A20295581674}
+		{736872EB-30A3-48F6-8903-8C40F72B48DA} = {36B33E68-DC91-4EFB-89CA-8A15FE94618C}
+		{2AD1E44D-F3D9-4D94-8444-69D082C5AF67} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
 	EndGlobalSection
 EndGlobal

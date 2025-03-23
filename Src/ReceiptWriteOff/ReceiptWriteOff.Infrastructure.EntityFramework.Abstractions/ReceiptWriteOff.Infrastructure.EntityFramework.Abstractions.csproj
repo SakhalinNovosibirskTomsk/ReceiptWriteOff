@@ -10,9 +10,4 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\ReceiptWriteOff.Domain.Entities\ReceiptWriteOff.Domain.Entities.csproj" />
-      <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.Repositories.Abstractions\ReceiptWriteOff.Infrastructure.Repositories.Abstractions.csproj" />
-    </ItemGroup>
-
 </Project>

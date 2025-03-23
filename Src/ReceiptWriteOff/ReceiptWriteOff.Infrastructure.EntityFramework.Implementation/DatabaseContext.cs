@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using ReceiptWriteOff.Domain.Entities;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 
 namespace ReceiptWriteOff.Infrastructure.EntityFramework;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext : DbContext, IDatabaseContext
 {
     public DbSet<Book> Books { get; set; }
     public DbSet<BookInstance> BookInstances { get; set; }
