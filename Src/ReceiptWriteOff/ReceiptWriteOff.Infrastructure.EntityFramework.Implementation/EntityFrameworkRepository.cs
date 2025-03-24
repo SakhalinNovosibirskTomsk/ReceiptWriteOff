@@ -11,12 +11,12 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
     where TPrimaryKey : struct
 {
     private readonly IDatabaseContext _databaseContext;
-    private readonly DbSet<TEntity> _entitySet;
+    private readonly IDbSet<TEntity> _entitySet;
     
     public EntityFrameworkRepository(IDatabaseContext databaseContext)
     {
         _databaseContext = databaseContext;
-        _entitySet = _databaseContext.Set<TEntity>();
+        _entitySet = new DdSetDecorator<TEntity>(_databaseContext.Set<TEntity>());
     }
 
     public async Task AddRangeIfNotExistsAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)

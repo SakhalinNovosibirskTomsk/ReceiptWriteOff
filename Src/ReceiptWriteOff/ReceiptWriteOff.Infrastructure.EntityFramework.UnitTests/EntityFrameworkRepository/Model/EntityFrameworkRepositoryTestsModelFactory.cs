@@ -1,6 +1,7 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Moq;
 using ReceiptWriteOff.Domain.Entities.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
@@ -9,26 +10,49 @@ namespace ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFramewo
 
 public static class EntityFrameworkRepositoryTestsModelFactory
 {
-    public static EntityFrameworkRepositoryTestsModel Create(int entitiesCount = 0)
+    public static EntityFrameworkRepositoryTestsModel Create(
+        int entitiesCount,
+        bool findAsyncReturnsNull)
     {
         var fixture = new Fixture().Customize(new AutoMoqCustomization());
         fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
             .ForEach(b => fixture.Behaviors.Remove(b));
         fixture.Behaviors.Add(new OmitOnRecursionBehavior());
 
-        var dbSetMock = fixture.Freeze<Mock<DbSet<IEntity<PrimaryKeyStub>>>>();
-        var entitiesRange = new List<IEntity<PrimaryKeyStub>>();
+        var cancellationToken = CancellationToken.None;
+        
+        var asNoTrackingQueryableMock = fixture.Freeze<Mock<IQueryable<IEntity<PrimaryKeyStub>>>>();
+        
+        var entitySetMock = fixture.Freeze<Mock<IDbSet<IEntity<PrimaryKeyStub>>>>();
+        entitySetMock.Setup(es => es.AddAsync(
+                It.IsAny<IEntity<PrimaryKeyStub>>(), 
+                cancellationToken))!
+            .ReturnsAsync(null as EntityEntry<IEntity<PrimaryKeyStub>>);
+        entitySetMock.Setup(es => es.AsNoTracking()).Returns(asNoTrackingQueryableMock.Object);
+        
+        var entitiesRange = fixture.CreateMany<IEntity<PrimaryKeyStub>>(entitiesCount).ToList();
+        IEntity<PrimaryKeyStub>? foundEntity = findAsyncReturnsNull ? null : fixture.Freeze<IEntity<PrimaryKeyStub>>();
+        foreach (var entity in entitiesRange)
+        {
+            object?[]? keyValues = [entity.Id];
+            entitySetMock.Setup(es => es.FindAsync(keyValues, cancellationToken))
+                .ReturnsAsync(foundEntity);
+        }
+        
         var databaseContextMock = fixture.Freeze<Mock<IDatabaseContext>>();
-        var repository = new EntityFrameworkRepository<IEntity<PrimaryKeyStub>, PrimaryKeyStub>(databaseContextMock.Object);
+        databaseContextMock.Setup(dc => dc.Set<IEntity<PrimaryKeyStub>>())
+            .Returns((DdSetDecorator<IEntity<PrimaryKeyStub>>)entitySetMock.Object);
+        
+        var repository = fixture.Freeze<EntityFrameworkRepository<IEntity<PrimaryKeyStub>, PrimaryKeyStub>>();
         
         var model = new EntityFrameworkRepositoryTestsModel
         {
             Repository = repository,
             EntitiesRange = entitiesRange,
-            EntitySetMock = dbSetMock
+            EntitySetMock = entitySetMock,
+            FoundEntity = foundEntity,
+            AsNoTrackingQueryableMock = asNoTrackingQueryableMock
         };
-        
-        databaseContextMock.Setup(dc => dc.Set<IEntity<PrimaryKeyStub>>()).Returns(dbSetMock.Object);
         
         return model;
     }
