@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFrameworkRepository.Model;
 
@@ -19,7 +18,7 @@ public class GetAllTests
 
         // Assert
         model.EntitySetMock.Verify(es => es.AsNoTracking(), Times.Once());
-        result.Should().BeSameAs(model.AsNoTrackingQueryableMock.Object);
+        result.Should().BeSameAs(model.QueryableMock.Object);
     }
     
     [Fact]

@@ -8,4 +8,5 @@ public interface IDbSet<TEntity> : IQueryable<TEntity> where TEntity : class
     ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     IQueryable<TEntity> AsNoTracking();
     EntityEntry<TEntity> Remove(TEntity entity);
+    //IQueryable<TEntity> GetQueryable(bool asNoTracking = false);
 }

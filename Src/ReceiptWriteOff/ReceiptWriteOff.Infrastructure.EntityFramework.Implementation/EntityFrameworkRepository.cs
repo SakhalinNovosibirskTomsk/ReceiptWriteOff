@@ -12,11 +12,13 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
 {
     private readonly IDatabaseContext _databaseContext;
     private readonly IDbSet<TEntity> _entitySet;
+    private readonly IQueryableExtensionsWrapper<TEntity> _queryableExtensionsWrapper;
     
-    public EntityFrameworkRepository(IDatabaseContext databaseContext)
+    public EntityFrameworkRepository(IDatabaseContext databaseContext, IQueryableExtensionsWrapper<TEntity> queryableExtensionsWrapper)
     {
         _databaseContext = databaseContext;
         _entitySet = databaseContext.GetDbSet<TEntity>();
+        _queryableExtensionsWrapper = queryableExtensionsWrapper;
     }
 
     public async Task AddRangeIfNotExistsAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
@@ -48,7 +50,8 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
 
     public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken, bool asNoTracking = false)
     {
-        return await GetAll(asNoTracking).ToListAsync(cancellationToken);
+        var queryable = GetAll(asNoTracking);
+        return await _queryableExtensionsWrapper.ToListAsync(queryable, cancellationToken);
     }
 
     public async Task UpdateAsync(TPrimaryKey id, CancellationToken cancellationToken)

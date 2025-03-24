@@ -10,5 +10,6 @@ public class EntityFrameworkRepositoryTestsModel
     public required Mock<IDbSet<IEntity<int>>> EntitySetMock { get; set; }
     public required List<IEntity<int>> EntitiesRange  { get; set; }
     public IEntity<int>? FoundEntity { get; set; }
-    public required Mock<IQueryable<IEntity<int>>> AsNoTrackingQueryableMock { get; set; }
+    public required Mock<IQueryable<IEntity<int>>> QueryableMock { get; set; }
+    public required Mock<IQueryableExtensionsWrapper<IEntity<int>>> QueryableExtensionsMock { get; set; }
 }
