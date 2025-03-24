@@ -43,6 +43,6 @@ public class DatabaseContext : DbContext, IDatabaseContext
         modelBuilder.Entity<WriteOffReason>().Property(bi => bi.Description).HasMaxLength(500);
     }
 
-    public override DdSetDecorator<TEntity> Set<TEntity>() where TEntity : class
-        => new (base.Set<TEntity>());
+    public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : class => 
+        new DdSetDecorator<TEntity>(base.Set<TEntity>());
 }

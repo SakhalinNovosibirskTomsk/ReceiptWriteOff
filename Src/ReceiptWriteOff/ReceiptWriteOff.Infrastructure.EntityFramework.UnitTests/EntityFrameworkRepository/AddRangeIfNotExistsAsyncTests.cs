@@ -20,7 +20,7 @@ public class AddRangeIfNotExistsAsyncTests
             x => x.FindAsync(It.IsAny<object?[]?>(), CancellationToken.None),
             Times.Never());
         model.EntitySetMock.Verify(
-            x => x.AddAsync(It.IsAny<IEntity<PrimaryKeyStub>>(), CancellationToken.None),
+            x => x.AddAsync(It.IsAny<IEntity<int>>(), CancellationToken.None),
             Times.Never());
     }
     
@@ -40,7 +40,7 @@ public class AddRangeIfNotExistsAsyncTests
             Times.Exactly(entitiesCount));
         model.EntitySetMock.Verify(
             x => x.AddAsync(
-                It.IsAny<IEntity<PrimaryKeyStub>>(), CancellationToken.None),
+                It.IsAny<IEntity<int>>(), CancellationToken.None),
             Times.Exactly(entitiesCount));
     }
     
@@ -59,7 +59,7 @@ public class AddRangeIfNotExistsAsyncTests
             x => x.FindAsync(It.IsAny<object?[]?>(), CancellationToken.None), 
             Times.Exactly(entitiesCount));
         model.EntitySetMock.Verify(
-            x => x.AddAsync(It.IsAny<IEntity<PrimaryKeyStub>>(), CancellationToken.None),
+            x => x.AddAsync(It.IsAny<IEntity<int>>(), CancellationToken.None),
             Times.Never());
     }
 }

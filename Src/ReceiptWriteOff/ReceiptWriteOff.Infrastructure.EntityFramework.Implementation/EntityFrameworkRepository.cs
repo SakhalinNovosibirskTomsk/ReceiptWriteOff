@@ -16,7 +16,7 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
     public EntityFrameworkRepository(IDatabaseContext databaseContext)
     {
         _databaseContext = databaseContext;
-        _entitySet = new DdSetDecorator<TEntity>(_databaseContext.Set<TEntity>());
+        _entitySet = databaseContext.GetDbSet<TEntity>();
     }
 
     public async Task AddRangeIfNotExistsAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)

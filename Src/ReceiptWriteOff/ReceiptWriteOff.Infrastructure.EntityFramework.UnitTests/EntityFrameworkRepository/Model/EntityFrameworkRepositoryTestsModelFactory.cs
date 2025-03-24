@@ -21,17 +21,17 @@ public static class EntityFrameworkRepositoryTestsModelFactory
 
         var cancellationToken = CancellationToken.None;
         
-        var asNoTrackingQueryableMock = fixture.Freeze<Mock<IQueryable<IEntity<PrimaryKeyStub>>>>();
+        var asNoTrackingQueryableMock = fixture.Freeze<Mock<IQueryable<IEntity<int>>>>();
         
-        var entitySetMock = fixture.Freeze<Mock<IDbSet<IEntity<PrimaryKeyStub>>>>();
+        var entitySetMock = fixture.Freeze<Mock<IDbSet<IEntity<int>>>>();
         entitySetMock.Setup(es => es.AddAsync(
-                It.IsAny<IEntity<PrimaryKeyStub>>(), 
+                It.IsAny<IEntity<int>>(), 
                 cancellationToken))!
-            .ReturnsAsync(null as EntityEntry<IEntity<PrimaryKeyStub>>);
+            .ReturnsAsync(null as EntityEntry<IEntity<int>>);
         entitySetMock.Setup(es => es.AsNoTracking()).Returns(asNoTrackingQueryableMock.Object);
         
-        var entitiesRange = fixture.CreateMany<IEntity<PrimaryKeyStub>>(entitiesCount).ToList();
-        IEntity<PrimaryKeyStub>? foundEntity = findAsyncReturnsNull ? null : fixture.Freeze<IEntity<PrimaryKeyStub>>();
+        var entitiesRange = fixture.CreateMany<IEntity<int>>(entitiesCount).ToList();
+        IEntity<int>? foundEntity = findAsyncReturnsNull ? null : fixture.Freeze<IEntity<int>>();
         foreach (var entity in entitiesRange)
         {
             object?[]? keyValues = [entity.Id];
@@ -40,10 +40,10 @@ public static class EntityFrameworkRepositoryTestsModelFactory
         }
         
         var databaseContextMock = fixture.Freeze<Mock<IDatabaseContext>>();
-        databaseContextMock.Setup(dc => dc.Set<IEntity<PrimaryKeyStub>>())
-            .Returns((DdSetDecorator<IEntity<PrimaryKeyStub>>)entitySetMock.Object);
+        databaseContextMock.Setup(dc => dc.GetDbSet<IEntity<int>>())
+            .Returns(entitySetMock.Object);
         
-        var repository = fixture.Freeze<EntityFrameworkRepository<IEntity<PrimaryKeyStub>, PrimaryKeyStub>>();
+        var repository = fixture.Freeze<EntityFrameworkRepository<IEntity<int>, int>>();
         
         var model = new EntityFrameworkRepositoryTestsModel
         {

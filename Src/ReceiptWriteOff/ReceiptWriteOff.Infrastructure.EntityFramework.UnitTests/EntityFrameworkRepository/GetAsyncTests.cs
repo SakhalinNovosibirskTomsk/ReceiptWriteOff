@@ -10,7 +10,7 @@ public class GetAsyncTests
     {
         // Arrange
         var model = EntityFrameworkRepositoryTestsModelFactory.Create(0, false);
-        PrimaryKeyStub primaryKey = new();
+        int primaryKey = new();
 
         // Act
         await model.Repository.GetAsync(primaryKey, CancellationToken.None);
