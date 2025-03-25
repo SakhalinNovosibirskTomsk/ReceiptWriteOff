@@ -66,7 +66,7 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
 
     public void Update(TEntity entity)
     {
-        _databaseContext.Entry(entity).State = EntityState.Modified;
+        _databaseContext.GetEntry(entity).State = EntityState.Modified;
     }
 
     public async Task DeleteAsync(TPrimaryKey id, CancellationToken cancellationToken)
@@ -81,7 +81,7 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
 
     public void Delete(TEntity entity)
     {
-        _databaseContext.Entry(entity).State = EntityState.Deleted;
+        _databaseContext.GetEntry(entity).State = EntityState.Deleted;
     }
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)

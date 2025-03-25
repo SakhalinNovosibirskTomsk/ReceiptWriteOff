@@ -24,16 +24,18 @@ public static class EntityFrameworkRepositoryTestsModelFactory
         
         IEntity<int>? foundEntity = findAsyncReturnsNull ? null : fixture.Freeze<IEntity<int>>();
         
-        var entitySetMock = SetupEntitySetMock(fixture, cancellationToken, queryableMock);
+        var entitySetMock = SetupEntitySetMock(fixture, cancellationToken, queryableMock, findAsyncReturnsNull, foundEntity);
         
         var entitiesRange = SetupEntitiesRange(entitiesCount, fixture, entitySetMock, cancellationToken, foundEntity);
 
         SetupQueriableExtensionsMock(fixture, entitiesRange, cancellationToken);
+
+        Mock<IEntityEntry<IEntity<int>>> entityEntryMock = fixture.Freeze<Mock<IEntityEntry<IEntity<int>>>>();
         
-        SetupDatabaseMock(fixture, entitySetMock);
-        
+        var databaseMock = SetupDatabaseMock(fixture, entitySetMock, entityEntryMock);
+
         var repository = fixture.Freeze<EntityFrameworkRepository<IEntity<int>, int>>();
-        
+
         var model = new EntityFrameworkRepositoryTestsModel
         {
             Repository = repository,
@@ -41,7 +43,9 @@ public static class EntityFrameworkRepositoryTestsModelFactory
             EntitySetMock = entitySetMock,
             FoundEntity = foundEntity,
             QueryableMock = queryableMock,
-            QueryableExtensionsMock = fixture.Freeze<Mock<IQueryableExtensionsWrapper<IEntity<int>>>>()
+            QueryableExtensionsMock = fixture.Freeze<Mock<IQueryableExtensionsWrapper<IEntity<int>>>>(),
+            DatabaseContextMock = databaseMock,
+            EntityEntryMock = entityEntryMock
         };
         
         return model;
@@ -61,11 +65,17 @@ public static class EntityFrameworkRepositoryTestsModelFactory
         return queryableExtensionsWrapperMock;
     }
 
-    private static void SetupDatabaseMock(IFixture fixture, Mock<IDbSet<IEntity<int>>> entitySetMock)
+    private static Mock<IDatabaseContext> SetupDatabaseMock(
+        IFixture fixture, 
+        Mock<IDbSet<IEntity<int>>> entitySetMock,
+        Mock<IEntityEntry<IEntity<int>>> entityEntryMock)
     {
         var databaseContextMock = fixture.Freeze<Mock<IDatabaseContext>>();
         databaseContextMock.Setup(dc => dc.GetDbSet<IEntity<int>>())
             .Returns(entitySetMock.Object);
+        databaseContextMock.Setup(dc => dc.GetEntry(It.IsAny<IEntity<int>>()))
+            .Returns(entityEntryMock.Object);
+        return databaseContextMock;
     }
 
     private static List<IEntity<int>> SetupEntitiesRange(int entitiesCount,
@@ -87,7 +97,9 @@ public static class EntityFrameworkRepositoryTestsModelFactory
 
     private static Mock<IDbSet<IEntity<int>>> SetupEntitySetMock(IFixture fixture,
         CancellationToken cancellationToken,
-        Mock<IQueryable<IEntity<int>>> asNoTrackingQueryableMock)
+        Mock<IQueryable<IEntity<int>>> asNoTrackingQueryableMock,
+        bool findAsyncReturnsNull,
+        IEntity<int>? foundEntity)
     {
         var entitySetMock = fixture.Freeze<Mock<IDbSet<IEntity<int>>>>();
         entitySetMock.Setup(es => es.AddAsync(
@@ -96,6 +108,8 @@ public static class EntityFrameworkRepositoryTestsModelFactory
             .ReturnsAsync(null as EntityEntry<IEntity<int>>);
         entitySetMock.Setup(es => es.AsNoTracking())
             .Returns(asNoTrackingQueryableMock.Object);
+        entitySetMock.Setup(es => es.FindAsync(It.IsAny<object?[]?>(), cancellationToken))
+            .ReturnsAsync(findAsyncReturnsNull ? null : foundEntity);
         return entitySetMock;
     }
 }

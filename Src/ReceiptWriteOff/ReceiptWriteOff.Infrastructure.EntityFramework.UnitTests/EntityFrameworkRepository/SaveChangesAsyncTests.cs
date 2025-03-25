@@ -3,20 +3,18 @@ using ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFrameworkRe
 
 namespace ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFrameworkRepository;
 
-public class GetAsyncTests
+public class SaveChangesAsyncTests
 {
     [Fact]
-    public async Task GetAsync_ShouldCallFindAsyncOnce()
+    public async Task SaveChangesAsync_Always_ShouldCallDatabaseSaveChanges()
     {
         // Arrange
         var model = EntityFrameworkRepositoryTestsModelFactory.Create(0, false);
 
         // Act
-        await model.Repository.GetAsync(1, CancellationToken.None);
+        await model.Repository.SaveChangesAsync(CancellationToken.None);
 
         // Assert
-        model.EntitySetMock.Verify(
-            es => es.FindAsync(It.IsAny<object?[]?>(), CancellationToken.None),
-            Times.Once());
+        model.DatabaseContextMock.Verify(dc => dc.SaveChangesAsync(CancellationToken.None), Times.Once);
     }
 }

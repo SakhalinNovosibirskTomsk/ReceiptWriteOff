@@ -44,5 +44,8 @@ public class DatabaseContext : DbContext, IDatabaseContext
     }
 
     public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : class => 
-        new DdSetDecorator<TEntity>(base.Set<TEntity>());
+        new DdSetWrapper<TEntity>(base.Set<TEntity>());
+
+    public IEntityEntry<TEntity> GetEntry<TEntity>(TEntity entity) where TEntity : class =>
+        new EntityEntryWrapper<TEntity>(base.Entry(entity));
 }
