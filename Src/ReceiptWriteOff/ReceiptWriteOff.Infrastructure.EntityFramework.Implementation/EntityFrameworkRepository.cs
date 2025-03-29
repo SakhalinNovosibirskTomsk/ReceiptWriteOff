@@ -38,9 +38,15 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
         await _entitySet.AddAsync(entity, cancellationToken);
     }
 
-    public async Task<TEntity?> GetAsync(TPrimaryKey id, CancellationToken cancellationToken)
+    public async Task<TEntity> GetAsync(TPrimaryKey id, CancellationToken cancellationToken)
     {
-        return await _entitySet.FindAsync([id], cancellationToken);
+        var entity = await _entitySet.FindAsync([id], cancellationToken);
+        if (entity == null)
+        {
+            throw new EntityNotFoundException($"Entity with id={id} not found.");
+        }
+
+        return entity;
     }
 
     public virtual IQueryable<TEntity> GetAll(bool asNoTracking = false)
@@ -57,10 +63,6 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
     public async Task UpdateAsync(TPrimaryKey id, CancellationToken cancellationToken)
     {
         var entity = await GetAsync(id, cancellationToken);
-        if (entity == null)
-        {
-            throw new EntityNotFoundException($"Entity with id={id} not found.");
-        }
         Update(entity);
     }
 
@@ -72,10 +74,6 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
     public async Task DeleteAsync(TPrimaryKey id, CancellationToken cancellationToken)
     {
         var entity = await GetAsync(id, cancellationToken);
-        if (entity == null)
-        {
-            throw new EntityNotFoundException($"Entity with id={id} not found.");
-        }
         _entitySet.Remove(entity);
     }
 

@@ -7,7 +7,7 @@ namespace ReceiptWriteOff.Infrastructure.Repositories.Abstractions
         where TPrimaryKey : struct
     {
         Task AddAsync(TEntity entity, CancellationToken cancellationToken);
-        Task<TEntity?> GetAsync(TPrimaryKey id, CancellationToken cancellationToken);
+        Task<TEntity> GetAsync(TPrimaryKey id, CancellationToken cancellationToken);
         IQueryable<TEntity> GetAll(bool asNoTracking = false);
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken, bool asNoTracking = false);
         Task UpdateAsync(TPrimaryKey id, CancellationToken cancellationToken);

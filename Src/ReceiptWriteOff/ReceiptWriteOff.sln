@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Mapping", "ReceiptWriteOff.Services.Mapping\ReceiptWriteOff.Services.Mapping.csproj", "{8D65144B-8FF4-4C8B-8E19-8772FE75AD22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Tests", "ReceiptWriteOff.Services.Tests\ReceiptWriteOff.Services.Tests.csproj", "{A23F0AD8-2ECF-4359-8343-F30A4B299C94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{8D65144B-8FF4-4C8B-8E19-8772FE75AD22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D65144B-8FF4-4C8B-8E19-8772FE75AD22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D65144B-8FF4-4C8B-8E19-8772FE75AD22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23F0AD8-2ECF-4359-8343-F30A4B299C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23F0AD8-2ECF-4359-8343-F30A4B299C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23F0AD8-2ECF-4359-8343-F30A4B299C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23F0AD8-2ECF-4359-8343-F30A4B299C94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CF7C988-0054-49BD-98A9-05C5906A7503} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
@@ -106,5 +112,6 @@ Global
 		{736872EB-30A3-48F6-8903-8C40F72B48DA} = {36B33E68-DC91-4EFB-89CA-8A15FE94618C}
 		{2AD1E44D-F3D9-4D94-8444-69D082C5AF67} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
 		{8D65144B-8FF4-4C8B-8E19-8772FE75AD22} = {6FC13982-33B3-4A14-A2BA-5502615CE1DB}
+		{A23F0AD8-2ECF-4359-8343-F30A4B299C94} = {36B33E68-DC91-4EFB-89CA-8A15FE94618C}
 	EndGlobalSection
 EndGlobal

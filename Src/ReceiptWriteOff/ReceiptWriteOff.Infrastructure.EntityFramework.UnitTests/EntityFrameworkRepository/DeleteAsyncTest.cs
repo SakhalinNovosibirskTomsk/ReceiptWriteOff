@@ -18,6 +18,10 @@ public class DeleteAsyncTest
 
         // Assert
         await func.Should().ThrowAsync<EntityNotFoundException>();
+        model.EntitySetMock.Verify(es => es.FindAsync(
+            It.IsAny<object?[]?>(), 
+            CancellationToken.None), Times.Once);
+        model.EntitySetMock.Verify(es => es.Remove(model.FoundEntity!), Times.Never);
     }
     
     [Fact]
@@ -31,6 +35,9 @@ public class DeleteAsyncTest
 
         // Assert
         await func.Should().NotThrowAsync<EntityNotFoundException>();
+        model.EntitySetMock.Verify(es => es.FindAsync(
+            It.IsAny<object?[]?>(), 
+            CancellationToken.None), Times.Once);
         model.EntitySetMock.Verify(es => es.Remove(model.FoundEntity!), Times.Once);
     }
 }

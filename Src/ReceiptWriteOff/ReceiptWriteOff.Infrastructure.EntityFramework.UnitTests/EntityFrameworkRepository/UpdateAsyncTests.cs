@@ -19,6 +19,11 @@ public class UpdateAsyncTests
 
         // Assert
         await func.Should().ThrowAsync<EntityNotFoundException>();
+        model.EntitySetMock.Verify(es => es.FindAsync(
+            It.IsAny<object?[]?>(), 
+            CancellationToken.None), Times.Once);
+        model.DatabaseContextMock.Verify(dc => dc.GetEntry(model.FoundEntity!), Times.Never);
+        model.EntityEntryMock.VerifySet(ee => ee.State = EntityState.Modified, Times.Never);
     }
     
     [Fact]
@@ -32,6 +37,9 @@ public class UpdateAsyncTests
 
         // Assert
         await func.Should().NotThrowAsync<EntityNotFoundException>();
+        model.EntitySetMock.Verify(es => es.FindAsync(
+            It.IsAny<object?[]?>(), 
+            CancellationToken.None), Times.Once);
         model.DatabaseContextMock.Verify(dc => dc.GetEntry(model.FoundEntity!), Times.Once);
         model.EntityEntryMock.VerifySet(ee => ee.State = EntityState.Modified, Times.Once);
     }

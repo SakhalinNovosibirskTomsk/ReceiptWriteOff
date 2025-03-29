@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.Repositories.Implementation\ReceiptWriteOff.Infrastructure.Repositories.Implementation.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Services.Abstractions\ReceiptWriteOff.Services.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
+    </ItemGroup>
+
 </Project>
