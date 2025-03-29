@@ -7,7 +7,9 @@ namespace ReceiptWriteOff.Infrastructure.Repositories.Implementation;
 
 public class BookRepository : EntityFrameworkRepository<Book, int>, IBookRepository
 {
-    public BookRepository(IDatabaseContext databaseContext, IQueryableExtensionsWrapper<Book> queryableExtensionsWrapper) 
+    public BookRepository(
+        IDatabaseContext databaseContext,
+        IQueryableExtensionsWrapper<Book> queryableExtensionsWrapper) 
         : base(databaseContext, queryableExtensionsWrapper)
     {
     }

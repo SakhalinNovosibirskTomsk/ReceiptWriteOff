@@ -9,7 +9,7 @@ public interface IBookService
     Task<BookDto> GetAsync(int id, CancellationToken cancellationToken);
     Task<IEnumerable<BookInstanceDto>> GetBookInstancesAsync(int bookId, CancellationToken cancellationToken);
     Task<BookDto> CreateAsync(CreateOrEditBookDto createOrEditBookDto, CancellationToken cancellationToken);
-    Task<bool> EditAsync(int id, CreateOrEditBookDto createOrEditBookDto, CancellationToken cancellationToken);
-    Task<bool> DeleteToArchiveAsync(int id, CancellationToken cancellationToken);
-    Task<bool> RestoreFromArchiveAsync(int id, CancellationToken cancellationToken);
+    Task EditAsync(int id, CreateOrEditBookDto createOrEditBookDto, CancellationToken cancellationToken);
+    Task DeleteToArchiveAsync(int id, CancellationToken cancellationToken);
+    Task RestoreFromArchiveAsync(int id, CancellationToken cancellationToken);
 }
