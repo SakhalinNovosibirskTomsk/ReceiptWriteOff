@@ -27,34 +27,15 @@ public static class BookServiceTestsModelFactory
             .ReturnsAsync(books);
         bookRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(book);
-        bookRepositoryMock.Setup(repo => repo.AddAsync(It.IsAny<Book>(), CancellationToken.None))
-            .Returns(Task.CompletedTask);
-        bookRepositoryMock.Setup(repo => repo.DeleteAsync(It.IsAny<int>(), CancellationToken.None))
-            .Returns(Task.CompletedTask);
-        bookRepositoryMock.Setup(repo => repo.SaveChangesAsync(CancellationToken.None))
-            .Returns(Task.CompletedTask);
 
         var bookArchiveRepositoryMock = fixture.Freeze<Mock<IBookRepository>>();
-        bookArchiveRepositoryMock.Setup(repo => repo.AddAsync(It.IsAny<Book>(), CancellationToken.None))
-            .Returns(Task.CompletedTask);
-        bookArchiveRepositoryMock.Setup(repo => repo.DeleteAsync(It.IsAny<int>(), CancellationToken.None))
-            .Returns(Task.CompletedTask);
         bookArchiveRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(book);
-        bookArchiveRepositoryMock.Setup(repo => repo.SaveChangesAsync(CancellationToken.None))
-            .Returns(Task.CompletedTask);
 
-        var bookDto = new BookDto
-        {
-            Title = "test_title",
-            Author = "test_author"
-        };
-        var bookInstanceDto = new BookInstanceDto
-        {
-            Book = bookDto
-        };
-        var createOrEditBookDto = new CreateOrEditBookDto { Title = "New Title", Author = "New Author" };
-
+        var bookDto = fixture.Freeze<BookDto>();
+        var bookInstanceDto = fixture.Freeze<BookInstanceDto>();
+        var createOrEditBookDto = fixture.Freeze<CreateOrEditBookDto>();
+        
         var mapperMock = fixture.Freeze<Mock<IMapper>>();
         mapperMock.Setup(m => m.Map<BookDto>(It.IsAny<Book>()))
             .Returns(bookDto);
@@ -69,8 +50,7 @@ public static class BookServiceTestsModelFactory
         bookUnitOfWorkMock.Setup(uow => uow.BookRepository).Returns(bookRepositoryMock.Object);
         bookUnitOfWorkMock.Setup(uow => uow.BookArchiveRepository).Returns(bookArchiveRepositoryMock.Object);
 
-
-        var service = new Implementations.BookService(bookUnitOfWorkMock.Object, mapperMock.Object);
+        var service = fixture.Freeze<Implementations.BookService>();
 
         return new BookServiceTestsModel
         {

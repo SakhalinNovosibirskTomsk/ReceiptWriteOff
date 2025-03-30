@@ -28,18 +28,9 @@ namespace ReceiptWriteOff.Services.Tests.BookInstanceService.Model;
                 .ReturnsAsync(bookInstances);
             repositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
                 .ReturnsAsync(bookInstance);
-            repositoryMock.Setup(repo => repo.DeleteAsync(It.IsAny<int>(), CancellationToken.None))
-                .Returns(Task.CompletedTask);
 
-            var bookInstanceShortDto = new BookInstanceShortDto();
-            var bookInstanceDto = new BookInstanceDto
-            {
-                Book = new BookDto()
-                {
-                    Author = "test_author",
-                    Title = "test_title"
-                }
-            };
+            var bookInstanceShortDto = fixture.Freeze<BookInstanceShortDto>();
+            var bookInstanceDto = fixture.Freeze<BookInstanceDto>();
             
             var mapperMock = fixture.Freeze<Mock<IMapper>>();
             mapperMock.Setup(m => m.Map<BookInstanceShortDto>(It.IsAny<BookInstance>()))
@@ -47,8 +38,8 @@ namespace ReceiptWriteOff.Services.Tests.BookInstanceService.Model;
             mapperMock.Setup(m => m.Map<BookInstanceDto>(It.IsAny<BookInstance>()))
                 .Returns(bookInstanceDto);
     
-            var service = new Implementations.BookInstanceService(repositoryMock.Object, mapperMock.Object);
-    
+            var service = fixture.Freeze<Implementations.BookInstanceService>();
+            
             return new BookInstanceServiceTestsModel
             {
                 Service = service,
