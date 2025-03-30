@@ -27,20 +27,11 @@ public static class ReceiptFactServiceTestsModelFactory
             .ReturnsAsync(receiptFacts);
         repositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(receiptFact);
-        repositoryMock.Setup(repo => repo.AddAsync(It.IsAny<ReceiptFact>(), CancellationToken.None))
-            .Returns(Task.CompletedTask);
-        repositoryMock.Setup(repo => repo.DeleteAsync(It.IsAny<int>(), CancellationToken.None))
-            .Returns(Task.CompletedTask);
-        repositoryMock.Setup(repo => repo.SaveChangesAsync(CancellationToken.None))
-            .Returns(Task.CompletedTask);
 
-        var receiptFactShortDto = new ReceiptFactShortDto();
-        var receiptFactDto = new ReceiptFactDto
-        {
-            BookInstance = bookInstance
-        };
-        var registerReceiptFactDto = new RegisterReceiptFactDto();
-
+        var receiptFactShortDto = fixture.Freeze<ReceiptFactShortDto>();
+        var receiptFactDto = fixture.Freeze<ReceiptFactDto>();
+        var registerReceiptFactDto = fixture.Freeze<RegisterReceiptFactDto>();
+        
         var mapperMock = fixture.Freeze<Mock<IMapper>>();
         mapperMock.Setup(m => m.Map<ReceiptFactShortDto>(It.IsAny<ReceiptFact>()))
             .Returns(receiptFactShortDto);
