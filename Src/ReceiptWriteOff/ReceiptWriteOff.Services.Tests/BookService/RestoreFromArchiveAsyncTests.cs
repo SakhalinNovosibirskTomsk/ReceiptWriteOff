@@ -1,7 +1,7 @@
 using Moq;
-using ReceiptWriteOff.Services.Tests.BookServiceTests.Model;
+using ReceiptWriteOff.Services.Tests.BookService.Model;
 
-namespace ReceiptWriteOff.Services.Tests.BookServiceTests;
+namespace ReceiptWriteOff.Services.Tests.BookService;
 
 public class RestoreFromArchiveAsyncTests
 {

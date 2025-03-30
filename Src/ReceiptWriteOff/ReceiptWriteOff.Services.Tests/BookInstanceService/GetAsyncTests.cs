@@ -3,9 +3,9 @@ using Moq;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
 using ReceiptWriteOff.Services.Contracts.BookInstance;
-using ReceiptWriteOff.Services.Tests.BookInstanceServiceTests.Model;
+using ReceiptWriteOff.Services.Tests.BookInstanceService.Model;
 
-namespace ReceiptWriteOff.Services.Tests.BookInstanceServiceTests;
+namespace ReceiptWriteOff.Services.Tests.BookInstanceService;
 
 public class GetAsyncTests
 {

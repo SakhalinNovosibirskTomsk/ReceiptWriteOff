@@ -9,7 +9,7 @@ using ReceiptWriteOff.Services.Contracts.Book;
 using ReceiptWriteOff.Services.Contracts.BookInstance;
 using ReceiptWriteOff.Services.Implementations;
 
-namespace ReceiptWriteOff.Services.Tests.BookInstanceServiceTests.Model;
+namespace ReceiptWriteOff.Services.Tests.BookInstanceService.Model;
     
     public static class BookInstanceServiceTestsModelFactory
     {
@@ -47,7 +47,7 @@ namespace ReceiptWriteOff.Services.Tests.BookInstanceServiceTests.Model;
             mapperMock.Setup(m => m.Map<BookInstanceDto>(It.IsAny<BookInstance>()))
                 .Returns(bookInstanceDto);
     
-            var service = new BookInstanceService(repositoryMock.Object, mapperMock.Object);
+            var service = new Implementations.BookInstanceService(repositoryMock.Object, mapperMock.Object);
     
             return new BookInstanceServiceTestsModel
             {

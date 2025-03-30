@@ -6,11 +6,11 @@ using ReceiptWriteOff.Services.Contracts.Book;
 using ReceiptWriteOff.Services.Contracts.BookInstance;
 using ReceiptWriteOff.Services.Implementations;
 
-namespace ReceiptWriteOff.Services.Tests.BookServiceTests.Model;
+namespace ReceiptWriteOff.Services.Tests.BookService.Model;
 
 public class BookServiceTestsModel
 {
-    public required BookService Service { get; set; }
+    public required Implementations.BookService Service { get; set; }
     public required Mock<IBookRepository> BookRepositoryMock { get; set; }
     public required Mock<IBookRepository> BookArchiveRepositoryMock { get; set; }
     public required Mock<IMapper> MapperMock { get; set; }

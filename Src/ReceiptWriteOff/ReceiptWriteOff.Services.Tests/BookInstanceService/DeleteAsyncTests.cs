@@ -1,7 +1,7 @@
 using Moq;
-using ReceiptWriteOff.Services.Tests.BookInstanceServiceTests.Model;
+using ReceiptWriteOff.Services.Tests.BookInstanceService.Model;
 
-namespace ReceiptWriteOff.Services.Tests.BookInstanceServiceTests;
+namespace ReceiptWriteOff.Services.Tests.BookInstanceService;
 
 public class DeleteAsyncTests
 {
