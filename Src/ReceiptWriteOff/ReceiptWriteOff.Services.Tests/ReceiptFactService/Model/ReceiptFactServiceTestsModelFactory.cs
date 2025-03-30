@@ -4,8 +4,8 @@ using AutoMapper;
 using Moq;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
+using ReceiptWriteOff.Services.Contracts.BookInstance;
 using ReceiptWriteOff.Services.Contracts.ReceiptFact;
-using ReceiptWriteOff.Services.Implementations;
 
 namespace ReceiptWriteOff.Services.Tests.ReceiptFactService.Model;
 
@@ -20,9 +20,10 @@ public static class ReceiptFactServiceTestsModelFactory
 
         var receiptFacts = fixture.CreateMany<ReceiptFact>(receiptFactsCount).ToList();
         var receiptFact = fixture.Freeze<ReceiptFact>();
+        var bookInstance = fixture.Freeze<BookInstanceShortDto>();
 
         var repositoryMock = fixture.Freeze<Mock<IReceiptFactRepository>>();
-        repositoryMock.Setup(repo => repo.GetAllAsync(CancellationToken.None))
+        repositoryMock.Setup(repo => repo.GetAllAsync(CancellationToken.None, false))
             .ReturnsAsync(receiptFacts);
         repositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(receiptFact);
@@ -34,7 +35,10 @@ public static class ReceiptFactServiceTestsModelFactory
             .Returns(Task.CompletedTask);
 
         var receiptFactShortDto = new ReceiptFactShortDto();
-        var receiptFactDto = new ReceiptFactDto();
+        var receiptFactDto = new ReceiptFactDto
+        {
+            BookInstance = bookInstance
+        };
         var registerReceiptFactDto = new RegisterReceiptFactDto();
 
         var mapperMock = fixture.Freeze<Mock<IMapper>>();

@@ -3,7 +3,6 @@ using Moq;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 using ReceiptWriteOff.Services.Contracts.ReceiptFact;
-using ReceiptWriteOff.Services.Implementations;
 
 namespace ReceiptWriteOff.Services.Tests.ReceiptFactService.Model;
 

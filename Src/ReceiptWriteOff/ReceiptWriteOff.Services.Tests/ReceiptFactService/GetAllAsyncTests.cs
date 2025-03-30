@@ -21,7 +21,7 @@ public class GetAllAsyncTests
         // Assert
         result.Should().HaveCount(receiptFactsCount);
         model.RepositoryMock.Verify(
-            repo => repo.GetAllAsync(CancellationToken.None), 
+            repo => repo.GetAllAsync(CancellationToken.None, false), 
             Times.Once);
         model.MapperMock.Verify(
             mapper => mapper.Map<ReceiptFactShortDto>(It.IsAny<ReceiptFact>()),

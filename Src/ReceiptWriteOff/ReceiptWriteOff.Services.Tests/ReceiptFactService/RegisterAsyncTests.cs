@@ -17,14 +17,14 @@ public class RegisterAsyncTests
 
         // Assert
         result.Should().BeEquivalentTo(model.ReceiptFactDto);
-        model.RepositoryMock.Verify(
+        model.RepositoryMock.Verify<Task>(
             repo => repo.AddAsync(model.ReceiptFact, CancellationToken.None), 
             Times.Once);
         model.RepositoryMock.Verify(
             repo => repo.SaveChangesAsync(CancellationToken.None), 
             Times.Once);
         model.MapperMock.Verify(
-            mapper => mapper.Map<ReceiptFact>(model.RegisterReceiptFactDto),
+            mapper => mapper.Map<Domain.Entities.ReceiptFact>(model.RegisterReceiptFactDto),
             Times.Once);
     }
 }
