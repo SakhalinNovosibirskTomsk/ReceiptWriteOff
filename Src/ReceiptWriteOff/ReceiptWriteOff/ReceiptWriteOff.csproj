@@ -7,9 +7,21 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
       <PackageReference Include="Microsoft.OpenApi" Version="1.6.23" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models\ReceiptFact\" />
+      <Folder Include="Models\WriteOffFact\" />
+      <Folder Include="Models\WriteOffReason\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Services.Abstractions\ReceiptWriteOff.Services.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
