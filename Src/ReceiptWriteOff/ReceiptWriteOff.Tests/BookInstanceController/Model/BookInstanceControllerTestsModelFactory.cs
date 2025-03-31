@@ -5,8 +5,8 @@ using Moq;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
 using ReceiptWriteOff.Models.BookInstance;
-using ReceiptWriteOff.Services.Abstractions;
-using ReceiptWriteOff.Services.Contracts.BookInstance;
+using ReceiptWriteOff.Application.Abstractions;
+using ReceiptWriteOff.Application.Contracts.BookInstance;
 
 namespace ReceiptWriteOff.Tests.BookInstanceController.Model;
 

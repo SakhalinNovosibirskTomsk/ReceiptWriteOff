@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Models.BookInstance;
-using ReceiptWriteOff.Services.Contracts.BookInstance;
+using ReceiptWriteOff.Application.Contracts.BookInstance;
 using ReceiptWriteOff.Tests.BookInstanceController.Model;
 
 namespace ReceiptWriteOff.Tests.BookInstanceController;

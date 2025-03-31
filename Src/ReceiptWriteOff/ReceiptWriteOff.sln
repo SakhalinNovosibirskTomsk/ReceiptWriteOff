@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff", "ReceiptWriteOff\ReceiptWriteOff.csproj", "{6A06A466-7E47-4484-8ECE-E8D8E5B2B3CA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{98BE5DA4-C8C1-4E3D-B922-7C7F8D707DEE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{04589AD5-B666-4237-8DCB-E56A90BF51CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9D58465A-6BC8-43B3-89EA-A20295581674}"
@@ -18,15 +16,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Domain.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.Repositories.Abstractions", "ReceiptWriteOff.Infrastructure.Repositories.Abstractions\ReceiptWriteOff.Infrastructure.Repositories.Abstractions.csproj", "{7E367336-B10B-4463-A47A-9C49749F256B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6FC13982-33B3-4A14-A2BA-5502615CE1DB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{6FC13982-33B3-4A14-A2BA-5502615CE1DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{2443BA35-A5DB-46D7-B676-1BDD6EB8EFA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Abstractions", "ReceiptWriteOff.Services.Abstractions\ReceiptWriteOff.Services.Abstractions.csproj", "{D44A4735-F874-4219-83DF-EA2E94CDDC21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Application.Abstractions", "ReceiptWriteOff.Application.Abstractions\ReceiptWriteOff.Application.Abstractions.csproj", "{D44A4735-F874-4219-83DF-EA2E94CDDC21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Contracts", "ReceiptWriteOff.Services.Contracts\ReceiptWriteOff.Services.Contracts.csproj", "{DA2B54B6-116F-4A97-9C24-5B384D74BE2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Application.Contracts", "ReceiptWriteOff.Application.Contracts\ReceiptWriteOff.Application.Contracts.csproj", "{DA2B54B6-116F-4A97-9C24-5B384D74BE2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Implementations", "ReceiptWriteOff.Services.Implementations\ReceiptWriteOff.Services.Implementations.csproj", "{58117DAB-21E2-4C29-9BC7-B1F9294FB4A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Application.Implementations", "ReceiptWriteOff.Application.Implementations\ReceiptWriteOff.Application.Implementations.csproj", "{58117DAB-21E2-4C29-9BC7-B1F9294FB4A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Domain.Entities.Abstractions", "ReceiptWriteOff.Domain.Entities.Abstractions\ReceiptWriteOff.Domain.Entities.Abstractions.csproj", "{E5C263F3-1191-408F-B86E-0F23A7429F41}"
 EndProject
@@ -36,11 +34,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions", "ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions\ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions.csproj", "{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Mapping", "ReceiptWriteOff.Services.Mapping\ReceiptWriteOff.Services.Mapping.csproj", "{8D65144B-8FF4-4C8B-8E19-8772FE75AD22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Application.Mapping", "ReceiptWriteOff.Application.Mapping\ReceiptWriteOff.Application.Mapping.csproj", "{8D65144B-8FF4-4C8B-8E19-8772FE75AD22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Services.Tests", "ReceiptWriteOff.Services.Tests\ReceiptWriteOff.Services.Tests.csproj", "{A23F0AD8-2ECF-4359-8343-F30A4B299C94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Application.Tests", "ReceiptWriteOff.Application.Tests\ReceiptWriteOff.Application.Tests.csproj", "{A23F0AD8-2ECF-4359-8343-F30A4B299C94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Tests", "ReceiptWriteOff.Tests\ReceiptWriteOff.Tests.csproj", "{BC7B97FD-65B5-404B-81A7-8A22D0C56510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Application.Settings", "ReceiptWriteOff.Application.Settings\ReceiptWriteOff.Application.Settings.csproj", "{EEF1AE27-B6D6-483B-BB05-DF8C5C82297F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.Migration", "ReceiptWriteOff.Infrastructure.EntityFramework.Migration\ReceiptWriteOff.Infrastructure.EntityFramework.Migration.csproj", "{15446897-D8DA-44D8-A0B4-1C6B828973D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +106,14 @@ Global
 		{BC7B97FD-65B5-404B-81A7-8A22D0C56510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC7B97FD-65B5-404B-81A7-8A22D0C56510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC7B97FD-65B5-404B-81A7-8A22D0C56510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF1AE27-B6D6-483B-BB05-DF8C5C82297F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF1AE27-B6D6-483B-BB05-DF8C5C82297F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF1AE27-B6D6-483B-BB05-DF8C5C82297F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF1AE27-B6D6-483B-BB05-DF8C5C82297F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15446897-D8DA-44D8-A0B4-1C6B828973D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15446897-D8DA-44D8-A0B4-1C6B828973D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15446897-D8DA-44D8-A0B4-1C6B828973D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15446897-D8DA-44D8-A0B4-1C6B828973D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CF7C988-0054-49BD-98A9-05C5906A7503} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
@@ -120,5 +130,7 @@ Global
 		{8D65144B-8FF4-4C8B-8E19-8772FE75AD22} = {6FC13982-33B3-4A14-A2BA-5502615CE1DB}
 		{A23F0AD8-2ECF-4359-8343-F30A4B299C94} = {36B33E68-DC91-4EFB-89CA-8A15FE94618C}
 		{BC7B97FD-65B5-404B-81A7-8A22D0C56510} = {36B33E68-DC91-4EFB-89CA-8A15FE94618C}
+		{EEF1AE27-B6D6-483B-BB05-DF8C5C82297F} = {6FC13982-33B3-4A14-A2BA-5502615CE1DB}
+		{15446897-D8DA-44D8-A0B4-1C6B828973D7} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
 	EndGlobalSection
 EndGlobal

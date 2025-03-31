@@ -1,9 +1,18 @@
+using ReceiptWriteOff.Infrastructure.EntityFramework;
+using ReceiptWriteOff.Infrastructure.Repositories.Implementation;
+using ReceiptWriteOff.Application.Implementations;
+using ReceiptWriteOff.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddRepositories();
+builder.Services.AddServices();
+
+var applicationSettings = builder.Configuration.Get<ApplicationSettings>();
+builder.Services.AddDatabaseContext(applicationSettings!.ConnectionString);
 
 var app = builder.Build();
 

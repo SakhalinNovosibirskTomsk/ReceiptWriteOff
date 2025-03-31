@@ -25,7 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ReceiptWriteOff.Domain.Entities\ReceiptWriteOff.Domain.Entities.csproj" />
-      <ProjectReference Include="..\ReceiptWriteOff.Services.Abstractions\ReceiptWriteOff.Services.Abstractions.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Application.Abstractions\ReceiptWriteOff.Application.Abstractions.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff\ReceiptWriteOff.csproj" />
     </ItemGroup>
 

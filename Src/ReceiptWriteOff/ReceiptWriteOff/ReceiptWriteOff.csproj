@@ -9,7 +9,9 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="14.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.3" />
       <PackageReference Include="Microsoft.OpenApi" Version="1.6.23" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
     </ItemGroup>
 
@@ -20,8 +22,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ReceiptWriteOff.Application.Settings\ReceiptWriteOff.Application.Settings.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.csproj" />
-      <ProjectReference Include="..\ReceiptWriteOff.Services.Abstractions\ReceiptWriteOff.Services.Abstractions.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.Repositories.Implementation\ReceiptWriteOff.Infrastructure.Repositories.Implementation.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Application.Abstractions\ReceiptWriteOff.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Application.Implementations\ReceiptWriteOff.Application.Implementations.csproj" />
     </ItemGroup>
 
 </Project>
