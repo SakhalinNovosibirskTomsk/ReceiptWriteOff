@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation
 {
     public static class EntityFrameworkServiceCollectionExtensions
     {
@@ -13,7 +14,10 @@ namespace ReceiptWriteOff.Infrastructure.EntityFramework
             {
                 options.UseLazyLoadingProxies();
                 options.UseNpgsql(connectionString);
+                //builder => builder.MigrationsAssembly("ReceiptWriteOff.Infrastructure.EntityFramework.Migration"));
             });
+            services.AddScoped<IDatabaseContext>(provider => provider.GetService<DatabaseContext>()!);
+            
             return services;
         }
     }

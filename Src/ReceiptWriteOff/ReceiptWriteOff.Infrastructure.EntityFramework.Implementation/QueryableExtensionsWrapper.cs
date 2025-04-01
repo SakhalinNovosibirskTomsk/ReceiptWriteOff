@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework;
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 
 public class QueryableExtensionsWrapper<TEntity> : IQueryableExtensionsWrapper<TEntity>
 {

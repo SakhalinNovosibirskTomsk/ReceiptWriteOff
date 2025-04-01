@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework;
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 
 public class EntityEntryWrapper<TEntity>(EntityEntry<TEntity> _entityEntry) : IEntityEntry<TEntity>
     where TEntity : class

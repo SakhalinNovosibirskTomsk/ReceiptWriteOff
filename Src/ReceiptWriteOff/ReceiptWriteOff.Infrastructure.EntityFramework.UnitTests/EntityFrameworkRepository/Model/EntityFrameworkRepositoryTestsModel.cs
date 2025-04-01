@@ -1,6 +1,7 @@
 using Moq;
 using ReceiptWriteOff.Domain.Entities.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 
 namespace ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFrameworkRepository.Model;
 

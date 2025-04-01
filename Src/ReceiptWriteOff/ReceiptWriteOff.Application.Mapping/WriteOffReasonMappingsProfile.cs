@@ -7,7 +7,7 @@ namespace ReceiptWriteOff.Application.Mapping;
 
 public class WriteOffReasonMappingsProfile : Profile
 {
-    protected WriteOffReasonMappingsProfile()
+    public WriteOffReasonMappingsProfile()
     {
         CreateMap<WriteOffReason, WriteOffReasonDto>();
         CreateMap<CreateOrEditWriteOffReasonDto, WriteOffReason>()

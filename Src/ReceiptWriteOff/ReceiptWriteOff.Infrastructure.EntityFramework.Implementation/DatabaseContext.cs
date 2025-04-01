@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework;
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 
 public class DatabaseContext : DbContext, IDatabaseContext
 {
@@ -11,6 +11,10 @@ public class DatabaseContext : DbContext, IDatabaseContext
     public DbSet<ReceiptFact> ReceiptFacts { get; set; }
     public DbSet<WriteOffFact> WriteOffFacts { get; set; }
     public DbSet<WriteOffReason> WriteOffReasons { get; set; }
+    
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

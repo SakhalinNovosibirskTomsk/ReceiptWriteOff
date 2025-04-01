@@ -8,5 +8,5 @@ public class Book : Entity
     public required string Author { get; set; }
     public bool IsArchived { get; set; }
     
-    public required ICollection<BookInstance> BookInstances { get; set; }
+    public virtual required ICollection<BookInstance> BookInstances { get; set; }
 }

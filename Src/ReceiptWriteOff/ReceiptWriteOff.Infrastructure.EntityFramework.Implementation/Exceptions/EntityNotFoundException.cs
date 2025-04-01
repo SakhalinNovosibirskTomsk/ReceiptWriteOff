@@ -1,4 +1,4 @@
-namespace ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 
 public class EntityNotFoundException : Exception
 {

@@ -8,5 +8,5 @@ public class ReceiptFact : Entity
     public DateTime? Date { get; set; }
     public int UserId { get; set; }
     
-    public required BookInstance BookInstance { get; set; }
+    public virtual required BookInstance BookInstance { get; set; }
 }

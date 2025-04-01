@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReceiptWriteOff.Domain.Entities.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
-using ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework;
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 
 public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
     where TEntity : class, IEntity<TPrimaryKey> 

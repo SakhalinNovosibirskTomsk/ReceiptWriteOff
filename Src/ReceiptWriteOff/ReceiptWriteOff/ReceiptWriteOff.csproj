@@ -9,24 +9,28 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="14.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Microsoft.OpenApi" Version="1.6.23" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\ReceiptFact\" />
-      <Folder Include="Models\WriteOffFact\" />
-      <Folder Include="Models\WriteOffReason\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ReceiptWriteOff.Application.Settings\ReceiptWriteOff.Application.Settings.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Contracts\ReceiptWriteOff.Contracts.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.Repositories.Implementation\ReceiptWriteOff.Infrastructure.Repositories.Implementation.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Application.Abstractions\ReceiptWriteOff.Application.Abstractions.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Application.Implementations\ReceiptWriteOff.Application.Implementations.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Mapping\ReceiptWriteOff.Mapping.csproj" />
     </ItemGroup>
 
 </Project>

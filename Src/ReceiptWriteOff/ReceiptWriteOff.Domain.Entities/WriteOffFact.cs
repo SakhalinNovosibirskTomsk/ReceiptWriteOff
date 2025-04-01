@@ -9,6 +9,6 @@ public class WriteOffFact : Entity
     public int UserId { get; set; }
     public int WriteOffReasonId { get; set; }
     
-    public required BookInstance BookInstance { get; set; }
-    public required WriteOffReason WriteOffReason { get; set; }
+    public virtual required BookInstance BookInstance { get; set; }
+    public virtual required WriteOffReason WriteOffReason { get; set; }
 }

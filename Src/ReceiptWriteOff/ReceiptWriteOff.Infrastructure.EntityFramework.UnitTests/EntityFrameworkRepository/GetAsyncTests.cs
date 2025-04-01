@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Moq;
-using ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFrameworkRepository.Model;
 
 namespace ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.EntityFrameworkRepository;

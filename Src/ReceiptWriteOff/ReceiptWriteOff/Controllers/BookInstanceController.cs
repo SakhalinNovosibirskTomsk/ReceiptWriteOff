@@ -1,8 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ReceiptWriteOff.Infrastructure.EntityFramework.Exceptions;
 using ReceiptWriteOff.Models.BookInstance;
 using ReceiptWriteOff.Application.Abstractions;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
+
 //ReSharper disable InconsistentNaming
 
 namespace ReceiptWriteOff.Controllers;

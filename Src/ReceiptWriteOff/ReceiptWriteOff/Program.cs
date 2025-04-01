@@ -1,18 +1,22 @@
+using Microsoft.EntityFrameworkCore;
 using ReceiptWriteOff.Infrastructure.EntityFramework;
 using ReceiptWriteOff.Infrastructure.Repositories.Implementation;
 using ReceiptWriteOff.Application.Implementations;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
+using ReceiptWriteOff.Mapping;
 using ReceiptWriteOff.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddRepositories();
-builder.Services.AddServices();
 
 var applicationSettings = builder.Configuration.Get<ApplicationSettings>();
 builder.Services.AddDatabaseContext(applicationSettings!.ConnectionString);
+builder.Services.AddMapping();
+builder.Services.AddRepositories();
+builder.Services.AddServices();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -31,5 +35,11 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    await db.Database.MigrateAsync();
+}
 
 app.Run();
