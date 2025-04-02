@@ -1,4 +1,4 @@
-namespace ReceiptWriteOff.Models.BookInstance;
+namespace ReceiptWriteOff.Contracts.BookInstance;
 
 public class BookInstanceShortResponse
 {

@@ -1,9 +1,9 @@
 using AutoMapper;
 using Moq;
 using ReceiptWriteOff.Domain.Entities;
-using ReceiptWriteOff.Models.BookInstance;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.BookInstance;
+using ReceiptWriteOff.Contracts.BookInstance;
 
 namespace ReceiptWriteOff.Tests.BookInstanceController.Model;
 

@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ReceiptWriteOff.Models.BookInstance;
 using ReceiptWriteOff.Application.Abstractions;
+using ReceiptWriteOff.Contracts.BookInstance;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 
 //ReSharper disable InconsistentNaming

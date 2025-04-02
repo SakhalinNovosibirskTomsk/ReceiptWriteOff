@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ReceiptWriteOff.Application.Contracts.BookInstance;
-using ReceiptWriteOff.Models.BookInstance;
+using ReceiptWriteOff.Contracts.BookInstance;
 
 namespace ReceiptWriteOff.Mapping;
 

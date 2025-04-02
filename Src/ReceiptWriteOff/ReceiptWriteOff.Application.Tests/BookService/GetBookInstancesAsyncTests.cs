@@ -25,7 +25,7 @@ public class GetBookInstancesAsyncTests
             repo => repo.GetAsync(bookId, CancellationToken.None), 
             Times.Once);
         model.MapperMock.Verify(
-            mapper => mapper.Map<BookInstanceDto>(It.IsAny<BookInstance>()),
+            mapper => mapper.Map<BookInstanceShortDto>(It.IsAny<BookInstance>()),
             Times.Exactly(bookInstances.Count));
     }
 }

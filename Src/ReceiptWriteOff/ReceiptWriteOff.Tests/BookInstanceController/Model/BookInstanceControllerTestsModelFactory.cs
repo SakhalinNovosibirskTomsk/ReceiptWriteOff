@@ -3,9 +3,9 @@ using AutoFixture.AutoMoq;
 using AutoMapper;
 using Moq;
 using ReceiptWriteOff.Domain.Entities;
-using ReceiptWriteOff.Models.BookInstance;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.BookInstance;
+using ReceiptWriteOff.Contracts.BookInstance;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 
 namespace ReceiptWriteOff.Tests.BookInstanceController.Model;

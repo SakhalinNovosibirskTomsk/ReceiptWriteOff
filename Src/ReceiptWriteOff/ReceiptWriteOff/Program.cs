@@ -16,7 +16,7 @@ builder.Services.AddDatabaseContext(applicationSettings!.ConnectionString);
 builder.Services.AddMapping();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
 
 var app = builder.Build();
 

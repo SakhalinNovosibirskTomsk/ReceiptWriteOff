@@ -23,10 +23,22 @@ public class BookService(IBookUnitOfWork _bookUnitOfWork, IMapper _mapper) : IBo
         return _mapper.Map<BookDto>(book);
     }
 
-    public async Task<IEnumerable<BookInstanceDto>> GetBookInstancesAsync(int bookId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<BookDto>> GetAllArchivedAsync(CancellationToken cancellationToken)
+    {
+        var books = await _bookUnitOfWork.BookArchiveRepository.GetAllAsync(cancellationToken);
+        return books.Select(_mapper.Map<BookDto>);
+    }
+
+    public async Task<BookDto> GetArchivedAsync(int id, CancellationToken cancellationToken)
+    {
+        var book = await _bookUnitOfWork.BookArchiveRepository.GetAsync(id, cancellationToken);
+        return _mapper.Map<BookDto>(book);
+    }
+
+    public async Task<IEnumerable<BookInstanceShortDto>> GetBookInstancesAsync(int bookId, CancellationToken cancellationToken)
     {
         var book = await _bookUnitOfWork.BookRepository.GetAsync(bookId, cancellationToken);
-        return book.BookInstances.Select(_mapper.Map<BookInstanceDto>);
+        return book.BookInstances.Select(_mapper.Map<BookInstanceShortDto>);
     }
 
     public async Task<BookDto> CreateAsync(CreateOrEditBookDto createOrEditBookDto, CancellationToken cancellationToken)
@@ -48,6 +60,7 @@ public class BookService(IBookUnitOfWork _bookUnitOfWork, IMapper _mapper) : IBo
         var book = await _bookUnitOfWork.BookRepository.GetAsync(id, cancellationToken);
         await _bookUnitOfWork.BookRepository.DeleteAsync(id, cancellationToken);
         await _bookUnitOfWork.BookArchiveRepository.AddAsync(book, cancellationToken);
+        book.IsArchived = true;
         await _bookUnitOfWork.BookArchiveRepository.SaveChangesAsync(cancellationToken);
     }
 
@@ -56,6 +69,7 @@ public class BookService(IBookUnitOfWork _bookUnitOfWork, IMapper _mapper) : IBo
         var book = await _bookUnitOfWork.BookArchiveRepository.GetAsync(id, cancellationToken);
         await _bookUnitOfWork.BookArchiveRepository.DeleteAsync(id, cancellationToken);
         await _bookUnitOfWork.BookRepository.AddAsync(book, cancellationToken);
+        book.IsArchived = false;
         await _bookUnitOfWork.BookRepository.SaveChangesAsync(cancellationToken);
     }
 }

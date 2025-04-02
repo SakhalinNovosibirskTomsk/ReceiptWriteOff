@@ -1,8 +1,8 @@
-using ReceiptWriteOff.Models.Book;
+using ReceiptWriteOff.Contracts.Book;
 
-namespace ReceiptWriteOff.Models.BookInstance;
+namespace ReceiptWriteOff.Contracts.BookInstance;
 
-public class BookInstanceResponse
+public class BookInstanceResponse : EntityResponse
 {
     public required BookResponse Book { get; set; }
     public int InventoryNumber { get; set; }
