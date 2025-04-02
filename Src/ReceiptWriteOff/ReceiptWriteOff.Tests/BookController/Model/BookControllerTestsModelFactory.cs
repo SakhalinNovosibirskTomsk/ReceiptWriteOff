@@ -27,13 +27,11 @@ public static class BookControllerTestsModelFactory
         var bookInstanceShortDtos = fixture.CreateMany<BookInstanceShortDto>(booksCount).ToList();
 
         var serviceMock = fixture.Freeze<Mock<IBookService>>();
-        serviceMock.Setup(service => service.GetAllAsync(It.IsAny<CancellationToken>()))
+        serviceMock.Setup(service => service.GetAllAsync(It.IsAny<bool>(),It.IsAny<CancellationToken>()))
             .ReturnsAsync(books);
         serviceMock.Setup(service =>
                 service.CreateAsync(It.IsAny<CreateOrEditBookDto>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(book);
-        serviceMock.Setup(service => service.GetAllArchivedAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(books);
         serviceMock.Setup(service => service.GetBookInstancesAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(bookInstanceShortDtos);
 
@@ -43,16 +41,12 @@ public static class BookControllerTestsModelFactory
         {
             serviceMock.Setup(service => service.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(book);
-            serviceMock.Setup(service => service.GetArchivedAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(book);
         }
         else
         {
             serviceMock.Setup(service => service.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ThrowsAsync(entityNotFoundException);
             serviceMock.Setup(service => service.DeleteToArchiveAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .ThrowsAsync(entityNotFoundException);
-            serviceMock.Setup(service => service.GetArchivedAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ThrowsAsync(entityNotFoundException);
             serviceMock.Setup(service => service.RestoreFromArchiveAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ThrowsAsync(entityNotFoundException);

@@ -1,5 +1,4 @@
 using ReceiptWriteOff.Domain.Entities;
-using ReceiptWriteOff.Infrastructure.EntityFramework;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
@@ -12,6 +11,14 @@ public class BookRepository : EntityFrameworkRepository<Book, int>, IBookReposit
         IDatabaseContext databaseContext,
         IQueryableExtensionsWrapper<Book> queryableExtensionsWrapper) 
         : base(databaseContext, queryableExtensionsWrapper)
+    {
+    }
+    
+    public BookRepository(
+        IDatabaseContext databaseContext,
+        string dbSetName,
+        IQueryableExtensionsWrapper<Book> queryableExtensionsWrapper) 
+        : base(databaseContext, dbSetName, queryableExtensionsWrapper)
     {
     }
 }

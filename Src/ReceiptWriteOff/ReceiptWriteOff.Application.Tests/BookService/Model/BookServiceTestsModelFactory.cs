@@ -21,12 +21,15 @@ public static class BookServiceTestsModelFactory
 
         var books = fixture.CreateMany<Book>(booksCount).ToList();
         var book = fixture.Freeze<Book>();
+        var bookQueryableMock = fixture.Freeze<Mock<IQueryable<Book>>>();
 
         var bookRepositoryMock = fixture.Freeze<Mock<IBookRepository>>();
         bookRepositoryMock.Setup(repo => repo.GetAllAsync(CancellationToken.None, false))
             .ReturnsAsync(books);
         bookRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(book);
+        bookRepositoryMock.Setup(repo => repo.GetAll(It.IsAny<bool>()))
+            .Returns(bookQueryableMock.Object);
 
         var bookArchiveRepositoryMock = fixture.Freeze<Mock<IBookRepository>>();
         bookArchiveRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
@@ -48,7 +51,6 @@ public static class BookServiceTestsModelFactory
 
         var bookUnitOfWorkMock = fixture.Freeze<Mock<IBookUnitOfWork>>();
         bookUnitOfWorkMock.Setup(uow => uow.BookRepository).Returns(bookRepositoryMock.Object);
-        bookUnitOfWorkMock.Setup(uow => uow.BookArchiveRepository).Returns(bookArchiveRepositoryMock.Object);
 
         var service = fixture.Freeze<Implementations.BookService>();
 
@@ -62,7 +64,8 @@ public static class BookServiceTestsModelFactory
             Book = book,
             BookDto = bookDto,
             BookInstanceDto = bookInstanceDto,
-            CreateOrEditBookDto = createOrEditBookDto
+            CreateOrEditBookDto = createOrEditBookDto,
+            BookQueryableMock = bookQueryableMock
         };
     }
 }

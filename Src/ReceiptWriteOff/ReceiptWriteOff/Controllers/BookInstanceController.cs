@@ -9,7 +9,7 @@ using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 namespace ReceiptWriteOff.Controllers;
 
 [ApiController]
-[Route("api/v1/bookInstances")]
+[Route("api/v1/book-instances")]
 public class BookInstanceController(IBookInstanceService _bookInstanceService, IMapper _mapper)
     : ControllerBase
 {
@@ -29,7 +29,7 @@ public class BookInstanceController(IBookInstanceService _bookInstanceService, I
     /// <summary>
     /// Получить данные экземпляра книги по id
     /// </summary>
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<BookInstanceResponse>> GetAsync(int id, CancellationToken cancellationToken)
@@ -50,7 +50,7 @@ public class BookInstanceController(IBookInstanceService _bookInstanceService, I
     /// <summary>
     /// Удалить экземпляр книги с id
     /// </summary>
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)

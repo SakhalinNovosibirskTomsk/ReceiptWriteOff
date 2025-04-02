@@ -19,4 +19,5 @@ public class BookServiceTestsModel
     public required BookDto BookDto { get; set; }
     public required BookInstanceDto BookInstanceDto { get; set; }
     public required CreateOrEditBookDto CreateOrEditBookDto { get; set; }
+    public required Mock<IQueryable<Book>> BookQueryableMock { get; set; }
 }

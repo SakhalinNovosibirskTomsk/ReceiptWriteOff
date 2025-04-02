@@ -18,6 +18,8 @@ public class DatabaseContext : DbContext, IDatabaseContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Book>().ToTable("Books");
+        
         modelBuilder.Entity<Book>().Property(bi => bi.Title).HasMaxLength(1000);
         modelBuilder.Entity<Book>().Property(bi => bi.Author).HasMaxLength(500);
         
@@ -49,6 +51,9 @@ public class DatabaseContext : DbContext, IDatabaseContext
 
     public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : class => 
         new DdSetWrapper<TEntity>(base.Set<TEntity>());
+
+    public IDbSet<TEntity> GetDbSet<TEntity>(string name) where TEntity : class =>
+        new DdSetWrapper<TEntity>(base.Set<TEntity>(name));
 
     public IEntityEntry<TEntity> GetEntry<TEntity>(TEntity entity) where TEntity : class =>
         new EntityEntryWrapper<TEntity>(base.Entry(entity));

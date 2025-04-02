@@ -2,19 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ReceiptWriteOff.Infrastructure.EntityFramework;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 
 #nullable disable
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework.Migrations
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Migration.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250402135428_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace ReceiptWriteOff.Infrastructure.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("ReceiptWriteOff.Domain.Entities.BookInstance", b =>

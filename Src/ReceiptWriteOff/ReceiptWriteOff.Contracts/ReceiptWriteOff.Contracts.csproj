@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="ReceiptFact\" />
       <Folder Include="WriteOffFact\" />
       <Folder Include="WriteOffReason\" />
     </ItemGroup>

@@ -11,11 +11,9 @@ public class BookUnitOfWork : IBookUnitOfWork
         IQueryableExtensionsWrapper<BookInstance> bookInstanceQueryableExtensionsWrapper)
     {
         BookRepository = new BookRepository(databaseContext, bookQueryableExtensionsWrapper);
-        BookArchiveRepository = new BookRepository(databaseContext, bookQueryableExtensionsWrapper);
         BookInstanceRepository = new BookInstanceRepository(databaseContext, bookInstanceQueryableExtensionsWrapper);
     }
 
     public IBookRepository BookRepository { get; }
-    public IBookRepository BookArchiveRepository { get; }
     public IBookInstanceRepository BookInstanceRepository { get; }
 }

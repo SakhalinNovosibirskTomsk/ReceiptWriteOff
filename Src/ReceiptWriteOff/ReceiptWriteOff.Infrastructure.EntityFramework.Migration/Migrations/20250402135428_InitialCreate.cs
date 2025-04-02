@@ -1,9 +1,10 @@
-﻿#nullable disable
-
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace ReceiptWriteOff.Infrastructure.EntityFramework.Migration
+#nullable disable
+
+namespace ReceiptWriteOff.Infrastructure.EntityFramework.Migration.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Microsoft.EntityFrameworkCore.Migrations.Migration

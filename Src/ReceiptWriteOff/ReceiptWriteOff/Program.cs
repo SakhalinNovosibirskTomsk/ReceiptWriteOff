@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using ReceiptWriteOff.Infrastructure.EntityFramework;
 using ReceiptWriteOff.Infrastructure.Repositories.Implementation;
 using ReceiptWriteOff.Application.Implementations;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;

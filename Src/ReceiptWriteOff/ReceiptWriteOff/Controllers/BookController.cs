@@ -15,15 +15,17 @@ public class BookController(IBookService _bookService, IMapper _mapper) : Contro
 {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<BookResponse>>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<ActionResult<List<BookResponse>>> GetAllAsync(
+        CancellationToken cancellationToken, 
+        bool isArchived = false)
     {
-        var books = (await _bookService.GetAllAsync(cancellationToken))
+        var books = (await _bookService.GetAllAsync(isArchived, cancellationToken))
             .Select(_mapper.Map<BookResponse>).ToList();
 
         return Ok(books);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<BookResponse>> GetAsync(int id, CancellationToken cancellationToken)
@@ -41,35 +43,7 @@ public class BookController(IBookService _bookService, IMapper _mapper) : Contro
         }
     }
     
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<BookResponse>>> GetAllArchivedAsync(CancellationToken cancellationToken)
-    {
-        var books = (await _bookService.GetAllArchivedAsync(cancellationToken))
-            .Select(_mapper.Map<BookResponse>).ToList();
-
-        return Ok(books);
-    }
-    
-    [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<BookResponse>> GetArchivedAsync(int id, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var book = await _bookService.GetArchivedAsync(id, cancellationToken);
-            var bookResponse = _mapper.Map<BookResponse>(book);
-            return Ok(bookResponse);
-        }
-        catch (EntityNotFoundException e)
-        {
-            Console.WriteLine(e);
-            return NotFound($"No Book with Id {id} found");
-        }
-    }
-
-    [HttpGet("{id}/instances")]
+    [HttpGet("{id}/book-instances")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<BookInstanceShortResponse>>> GetBookInstancesAsync(int id, CancellationToken cancellationToken)
     {
@@ -92,7 +66,7 @@ public class BookController(IBookService _bookService, IMapper _mapper) : Contro
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> EditAsync(int id, CreateOrEditBookRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> EditAsync(int id, [FromBody] CreateOrEditBookRequest request, CancellationToken cancellationToken)
     {
         var bookDto = _mapper.Map<CreateOrEditBookDto>(request);
         await _bookService.EditAsync(id, bookDto, cancellationToken);
@@ -100,7 +74,7 @@ public class BookController(IBookService _bookService, IMapper _mapper) : Contro
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteToArchiveAsync(int id, CancellationToken cancellationToken)
@@ -117,7 +91,7 @@ public class BookController(IBookService _bookService, IMapper _mapper) : Contro
         }
     }
 
-    [HttpPost("{id}/restore")]
+    [HttpPost("archived/{id:int}/restore")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> RestoreFromArchiveAsync(int id, CancellationToken cancellationToken)
