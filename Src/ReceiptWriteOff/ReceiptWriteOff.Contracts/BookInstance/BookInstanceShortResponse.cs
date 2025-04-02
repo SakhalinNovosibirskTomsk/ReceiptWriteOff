@@ -1,6 +1,6 @@
 namespace ReceiptWriteOff.Contracts.BookInstance;
 
-public class BookInstanceShortResponse
+public class BookInstanceShortResponse : EntityResponse
 {
     public int InventoryNumber { get; set; }
 }
