@@ -13,8 +13,9 @@ namespace ReceiptWriteOff.Infrastructure.EntityFramework.Implementation
             services.AddDbContext<DatabaseContext>(options =>
             {
                 options.UseLazyLoadingProxies();
-                options.UseNpgsql(connectionString);
-                //builder => builder.MigrationsAssembly("ReceiptWriteOff.Infrastructure.EntityFramework.Migration"));
+                options.UseNpgsql(
+                    connectionString,
+                    builder => builder.MigrationsAssembly("ReceiptWriteOff.Infrastructure.EntityFramework.Migration"));
             });
             services.AddScoped<IDatabaseContext>(provider => provider.GetService<DatabaseContext>()!);
             

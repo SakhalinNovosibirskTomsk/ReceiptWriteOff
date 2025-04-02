@@ -27,6 +27,7 @@
       <ProjectReference Include="..\ReceiptWriteOff.Application.Settings\ReceiptWriteOff.Application.Settings.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Contracts\ReceiptWriteOff.Contracts.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation\ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.csproj" />
+      <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.EntityFramework.Migration\ReceiptWriteOff.Infrastructure.EntityFramework.Migration.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.Repositories.Implementation\ReceiptWriteOff.Infrastructure.Repositories.Implementation.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Application.Abstractions\ReceiptWriteOff.Application.Abstractions.csproj" />
       <ProjectReference Include="..\ReceiptWriteOff.Application.Implementations\ReceiptWriteOff.Application.Implementations.csproj" />
