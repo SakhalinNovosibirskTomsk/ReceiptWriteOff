@@ -1,4 +1,6 @@
 using AutoMapper;
+using ReceiptWriteOff.Application.Contracts.WriteOffReason;
+using ReceiptWriteOff.Contracts.WriteOffReason;
 
 namespace ReceiptWriteOff.Mapping;
 
@@ -6,10 +8,7 @@ public class WriteOffReasonMappingsProfile : Profile
 {
     public WriteOffReasonMappingsProfile()
     {
-        // CreateMap<WriteOffReason, WriteOffReasonDto>();
-        // CreateMap<CreateOrEditWriteOffReasonDto, WriteOffReason>()
-        //     .ForMember(writeOffReason => writeOffReason.Id, map => map.Ignore())
-        //     .ForMember(writeOffReason => writeOffReason.WriteOffFacts, map => map.MapFrom(
-        //         dto => new List<WriteOffFactDto>()));
+        CreateMap<WriteOffReasonDto, WriteOffReasonResponse>();
+        CreateMap<CreateOrEditWriteOffReasonRequest, CreateOrEditWriteOffReasonDto>();
     }
 }
