@@ -68,10 +68,17 @@ public class BookController(IBookService _bookService, IMapper _mapper) : Contro
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> EditAsync(int id, [FromBody] CreateOrEditBookRequest request, CancellationToken cancellationToken)
     {
-        var bookDto = _mapper.Map<CreateOrEditBookDto>(request);
-        await _bookService.EditAsync(id, bookDto, cancellationToken);
-
-        return NoContent();
+        try
+        {
+            var bookDto = _mapper.Map<CreateOrEditBookDto>(request);
+            await _bookService.EditAsync(id, bookDto, cancellationToken);
+            return NoContent();
+        }
+        catch (EntityNotFoundException e)
+        {
+            Console.WriteLine(e);
+            return NotFound($"No Book with Id {id} found");
+        }
     }
 
     [HttpDelete("{id:int}")]

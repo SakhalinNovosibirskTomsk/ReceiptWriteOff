@@ -28,4 +28,23 @@ public class EditAsyncTests
             mapper => mapper.Map<CreateOrEditBookDto>(model.CreateOrEditBookRequest),
             Times.Once);
     }
+    
+    [Fact]
+    public async Task EditAsync_ReturnsNotFound_WhenBookNotFound()
+    {
+        // Arrange
+        int id = 1;
+        var model = BookControllerTestsModelFactory.Create(bookExists: false);
+
+        // Act
+        var result = await model.Controller.EditAsync(id, model.CreateOrEditBookRequest, CancellationToken.None);
+
+        // Assert
+        result.Should().BeOfType<NotFoundObjectResult>();
+        var notFoundResult = (NotFoundObjectResult)result;
+        notFoundResult.Value.Should().Be($"No Book with Id {id} found");
+        model.ServiceMock.Verify(
+            service => service.EditAsync(id, It.IsAny<CreateOrEditBookDto>(), It.IsAny<CancellationToken>()),
+            Times.Once);
+    }
 }

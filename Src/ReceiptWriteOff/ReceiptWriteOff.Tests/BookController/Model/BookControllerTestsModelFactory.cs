@@ -50,6 +50,8 @@ public static class BookControllerTestsModelFactory
                 .ThrowsAsync(entityNotFoundException);
             serviceMock.Setup(service => service.RestoreFromArchiveAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ThrowsAsync(entityNotFoundException);
+            serviceMock.Setup(service => service.EditAsync(It.IsAny<int>(), It.IsAny<CreateOrEditBookDto>(),It.IsAny<CancellationToken>()))
+                .ThrowsAsync(entityNotFoundException);
         }
 
         var bookResponse = fixture.Freeze<BookResponse>();
