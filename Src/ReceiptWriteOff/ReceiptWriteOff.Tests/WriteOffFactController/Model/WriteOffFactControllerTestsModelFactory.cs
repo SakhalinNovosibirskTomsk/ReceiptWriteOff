@@ -45,6 +45,8 @@ using AutoFixture;
                     .ThrowsAsync(entityNotFoundException);
                 serviceMock.Setup(service => service.DeleteAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                     .ThrowsAsync(entityNotFoundException);
+                serviceMock.Setup(service => service.RegisterAsync(It.IsAny<RegisterWriteOffFactDto>(), It.IsAny<CancellationToken>()))
+                    .ThrowsAsync(entityNotFoundException);
             }
     
             var mapperMock = fixture.Freeze<Mock<IMapper>>();

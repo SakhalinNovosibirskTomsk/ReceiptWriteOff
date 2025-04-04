@@ -25,5 +25,6 @@ public class BookInstanceService(IBookInstanceRepository _bookInstanceRepository
     public async Task DeleteAsync(int id, CancellationToken cancellationToken)
     {
         await _bookInstanceRepository.DeleteAsync(id, cancellationToken);
+        await _bookInstanceRepository.SaveChangesAsync(cancellationToken);
     }
 }

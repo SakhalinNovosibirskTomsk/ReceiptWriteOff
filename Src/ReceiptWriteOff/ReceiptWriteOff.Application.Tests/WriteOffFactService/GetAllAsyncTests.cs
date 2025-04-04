@@ -19,8 +19,9 @@ public class GetAllAsyncTests
         var result = await model.Service.GetAllAsync(CancellationToken.None);
 
         // Assert
+        model.WriteOffFactUnitOfWorkMock.Verify(uow => uow.WriteOffFactRepository, Times.Once);
         result.Should().HaveCount(writeOffFactsCount);
-        model.RepositoryMock.Verify(
+        model.WriteOffFactRepositoryMock.Verify(
             repo => repo.GetAllAsync(CancellationToken.None, false),
             Times.Once);
         model.MapperMock.Verify(

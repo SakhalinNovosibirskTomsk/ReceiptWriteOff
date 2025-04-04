@@ -17,10 +17,10 @@ public static class RepositoriesServiceCollectionExtensions
             .AddScoped<IQueryableExtensionsWrapper<WriteOffFact>, QueryableExtensionsWrapper<WriteOffFact>>()
             .AddScoped<IQueryableExtensionsWrapper<WriteOffReason>, QueryableExtensionsWrapper<WriteOffReason>>()
         
+            .AddScoped<IBookRepository, BookRepository>()
             .AddScoped<IBookInstanceRepository, BookInstanceRepository>()
-            .AddScoped<IBookUnitOfWork, BookUnitOfWork>()
             .AddScoped<IReceiptFactRepository, ReceiptFactRepository>()
-            .AddScoped<IWriteOffFactRepository, WriteOffFactRepository>()
+            .AddScoped<IWriteOffFactUnitOfWork, WriteOffFactUnitOfWork>()
             .AddScoped<IWriteOffReasonRepository, WriteOffReasonRepository>();
 
         return services;

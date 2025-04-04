@@ -2,5 +2,5 @@ namespace ReceiptWriteOff.Contracts.WriteOffReason;
 
 public class CreateOrEditWriteOffReasonRequest
 {
-    public required string Reason { get; set; }
+    public required string Description { get; set; }
 }

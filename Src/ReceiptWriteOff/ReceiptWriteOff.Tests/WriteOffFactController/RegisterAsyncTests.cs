@@ -28,4 +28,21 @@ public class RegisterAsyncTests
             mapper => mapper.Map<RegisterWriteOffFactDto>(model.RegisterWriteOffFactRequest),
             Times.Once);
     }
+    
+    [Fact]
+    public async Task RegisterAsync_ReturnsNotFound_WhenSomeEntityNotFound()
+    {
+        // Arrange
+        int id = 1;
+        var model = WriteOffFactControllerTestsModelFactory.Create(writeOffFactExists: false);
+
+        // Act
+        var result = await model.Controller.RegisterAsync(model.RegisterWriteOffFactRequest, CancellationToken.None);
+
+        // Assert
+        result.Result.Should().BeOfType<NotFoundResult>();
+        model.ServiceMock.Verify(
+            service => service.RegisterAsync(It.IsAny<RegisterWriteOffFactDto>(), It.IsAny<CancellationToken>()),
+            Times.Once);
+    }
 }

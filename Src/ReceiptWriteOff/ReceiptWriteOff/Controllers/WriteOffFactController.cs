@@ -45,10 +45,18 @@ using AutoMapper;
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<WriteOffFactResponse>> RegisterAsync([FromBody] RegisterWriteOffFactRequest request, CancellationToken cancellationToken)
         {
-            var registerWriteOffFactDto = _mapper.Map<RegisterWriteOffFactDto>(request);
-            var writeOffFact = await _writeOffFactService.RegisterAsync(registerWriteOffFactDto, cancellationToken);
-            var writeOffFactResponse = _mapper.Map<WriteOffFactResponse>(writeOffFact);
-            return CreatedAtAction(nameof(GetAsync), new { id = writeOffFactResponse.Id }, writeOffFactResponse);
+            try
+            {
+                var registerWriteOffFactDto = _mapper.Map<RegisterWriteOffFactDto>(request);
+                var writeOffFact = await _writeOffFactService.RegisterAsync(registerWriteOffFactDto, cancellationToken);
+                var writeOffFactResponse = _mapper.Map<WriteOffFactResponse>(writeOffFact);
+                return CreatedAtAction(nameof(GetAsync), new { id = writeOffFactResponse.Id }, writeOffFactResponse);
+            }
+            catch (EntityNotFoundException e)
+            {
+                Console.WriteLine(e);
+                return NotFound();
+            }
         }
     
         [HttpPut("{id}")]

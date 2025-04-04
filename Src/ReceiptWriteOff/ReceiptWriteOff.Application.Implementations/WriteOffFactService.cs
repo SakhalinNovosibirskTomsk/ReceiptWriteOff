@@ -8,19 +8,19 @@ using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 
 namespace ReceiptWriteOff.Application.Implementations;
 
-public class WriteOffFactService(IWriteOffFactRepository _writeOffFactRepository, IMapper _mapper) 
+public class WriteOffFactService(IWriteOffFactUnitOfWork _writeOffFactUnitOfWork, IMapper _mapper) 
     : IWriteOffFactService
 {
     public async Task<IEnumerable<WriteOffFactShortDto>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var writeOffFacts = await _writeOffFactRepository.GetAllAsync(
+        var writeOffFacts = await _writeOffFactUnitOfWork.WriteOffFactRepository.GetAllAsync(
             cancellationToken);
         return writeOffFacts.Select(_mapper.Map<WriteOffFactShortDto>);
     }
 
     public async Task<WriteOffFactDto> GetAsync(int id, CancellationToken cancellationToken)
     {
-        var writeOffFact = await _writeOffFactRepository.GetAsync(id, cancellationToken);
+        var writeOffFact = await _writeOffFactUnitOfWork.WriteOffFactRepository.GetAsync(id, cancellationToken);
         return _mapper.Map<WriteOffFactDto>(writeOffFact);
     }
 
@@ -28,25 +28,36 @@ public class WriteOffFactService(IWriteOffFactRepository _writeOffFactRepository
         RegisterWriteOffFactDto registerWriteOffFactDto, 
         CancellationToken cancellationToken)
     {
-        var writeOffFact = _mapper.Map<WriteOffFact>(registerWriteOffFactDto);
+        var bookInstance = await _writeOffFactUnitOfWork.BookInstanceRepository.GetAsync(
+            registerWriteOffFactDto.BookInstanceId, 
+            cancellationToken);
         
-        await _writeOffFactRepository.AddAsync(writeOffFact, cancellationToken);
-        await _writeOffFactRepository.SaveChangesAsync(cancellationToken);
+        var writeOffReason = await _writeOffFactUnitOfWork.WriteOffReasonRepository.GetAsync(
+            registerWriteOffFactDto.WriteOffReasonId, 
+            cancellationToken);
+            
+        var writeOffFact = _mapper.Map<WriteOffFact>(registerWriteOffFactDto);
+        writeOffFact.BookInstance = bookInstance;
+        writeOffFact.WriteOffReason = writeOffReason;
+
+        var writeOffFactRepository = _writeOffFactUnitOfWork.WriteOffFactRepository;
+        await writeOffFactRepository.AddAsync(writeOffFact, cancellationToken);
+        await writeOffFactRepository.SaveChangesAsync(cancellationToken);
         return _mapper.Map<WriteOffFactDto>(writeOffFact);
     }
 
     public async Task EditAsync(int id, RegisterWriteOffFactDto registerWriteOffFactDto, CancellationToken cancellationToken)
     {
-        var writeOffFact = await _writeOffFactRepository.GetAsync(id, cancellationToken);
-        
+        var writeOffFactRepository = _writeOffFactUnitOfWork.WriteOffFactRepository;
+        var writeOffFact = await writeOffFactRepository.GetAsync(id, cancellationToken);
         _mapper.Map(registerWriteOffFactDto, writeOffFact);
-        
-        await _writeOffFactRepository.SaveChangesAsync(cancellationToken);
+        await writeOffFactRepository.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteAsync(int id, CancellationToken cancellationToken)
     {
-        await _writeOffFactRepository.DeleteAsync(id, cancellationToken);
-        await _writeOffFactRepository.SaveChangesAsync(cancellationToken);
+        var writeOffFactRepository = _writeOffFactUnitOfWork.WriteOffFactRepository;
+        await writeOffFactRepository.DeleteAsync(id, cancellationToken);
+        await writeOffFactRepository.SaveChangesAsync(cancellationToken);
     }
 }

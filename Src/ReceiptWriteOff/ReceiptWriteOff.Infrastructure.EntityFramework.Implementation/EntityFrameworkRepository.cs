@@ -12,7 +12,7 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
 {
     private readonly IDatabaseContext _databaseContext;
     private readonly IDbSet<TEntity> _entitySet;
-    private readonly IQueryableExtensionsWrapper<TEntity> _queryableExtensionsWrapper;
+    protected readonly IQueryableExtensionsWrapper<TEntity> _queryableExtensionsWrapper;
     
     public EntityFrameworkRepository(
         IDatabaseContext databaseContext, 

@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoMapper;
@@ -6,7 +7,6 @@ using ReceiptWriteOff.Application.Contracts.Book;
 using ReceiptWriteOff.Application.Contracts.BookInstance;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
-using ReceiptWriteOff.Application.Implementations;
 
 namespace ReceiptWriteOff.Application.Tests.BookService.Model;
 
@@ -21,19 +21,18 @@ public static class BookServiceTestsModelFactory
 
         var books = fixture.CreateMany<Book>(booksCount).ToList();
         var book = fixture.Freeze<Book>();
+        
         var bookQueryableMock = fixture.Freeze<Mock<IQueryable<Book>>>();
 
         var bookRepositoryMock = fixture.Freeze<Mock<IBookRepository>>();
         bookRepositoryMock.Setup(repo => repo.GetAllAsync(CancellationToken.None, false))
             .ReturnsAsync(books);
+        bookRepositoryMock.Setup(repo => repo.GetAllAsync(It.IsAny<bool>(), CancellationToken.None, false))
+            .ReturnsAsync(books);
         bookRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(book);
         bookRepositoryMock.Setup(repo => repo.GetAll(It.IsAny<bool>()))
             .Returns(bookQueryableMock.Object);
-
-        var bookArchiveRepositoryMock = fixture.Freeze<Mock<IBookRepository>>();
-        bookArchiveRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
-            .ReturnsAsync(book);
 
         var bookDto = fixture.Freeze<BookDto>();
         var bookInstanceDto = fixture.Freeze<BookInstanceDto>();
@@ -49,16 +48,12 @@ public static class BookServiceTestsModelFactory
         mapperMock.Setup(m => m.Map<Book>(createOrEditBookDto))
             .Returns(book);
 
-        var bookUnitOfWorkMock = fixture.Freeze<Mock<IBookUnitOfWork>>();
-        bookUnitOfWorkMock.Setup(uow => uow.BookRepository).Returns(bookRepositoryMock.Object);
-
         var service = fixture.Freeze<Implementations.BookService>();
 
         return new BookServiceTestsModel
         {
             Service = service,
             BookRepositoryMock = bookRepositoryMock,
-            BookArchiveRepositoryMock = bookArchiveRepositoryMock,
             MapperMock = mapperMock,
             Books = books,
             Book = book,

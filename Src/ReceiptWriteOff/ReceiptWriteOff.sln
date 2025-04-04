@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Domain.Enti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36B33E68-DC91-4EFB-89CA-8A15FE94618C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests", "ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests\ReceiptWriteOff.Infrastructure.EntityFramework.UnitTests.csproj", "{736872EB-30A3-48F6-8903-8C40F72B48DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.Tests", "ReceiptWriteOff.Infrastructure.EntityFramework.Tests\ReceiptWriteOff.Infrastructure.EntityFramework.Tests.csproj", "{736872EB-30A3-48F6-8903-8C40F72B48DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions", "ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions\ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions.csproj", "{2AD1E44D-F3D9-4D94-8444-69D082C5AF67}"
 EndProject
@@ -47,6 +47,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Contracts", "ReceiptWriteOff.Contracts\ReceiptWriteOff.Contracts.csproj", "{8A1C5F7C-9191-45BB-99DE-FC8BB66E3E53}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Mapping", "ReceiptWriteOff.Mapping\ReceiptWriteOff.Mapping.csproj", "{AFE4A274-196C-433A-925D-66396DEFB770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWriteOff.Infrastructure.Repositories.Tests", "ReceiptWriteOff.Infrastructure.Repositories.Tests\ReceiptWriteOff.Infrastructure.Repositories.Tests.csproj", "{0A93205E-C0CC-4C7C-B770-5E8D90860DDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -126,6 +128,10 @@ Global
 		{AFE4A274-196C-433A-925D-66396DEFB770}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE4A274-196C-433A-925D-66396DEFB770}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFE4A274-196C-433A-925D-66396DEFB770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A93205E-C0CC-4C7C-B770-5E8D90860DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A93205E-C0CC-4C7C-B770-5E8D90860DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A93205E-C0CC-4C7C-B770-5E8D90860DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A93205E-C0CC-4C7C-B770-5E8D90860DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CF7C988-0054-49BD-98A9-05C5906A7503} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
@@ -146,5 +152,6 @@ Global
 		{15446897-D8DA-44D8-A0B4-1C6B828973D7} = {04589AD5-B666-4237-8DCB-E56A90BF51CC}
 		{8A1C5F7C-9191-45BB-99DE-FC8BB66E3E53} = {2443BA35-A5DB-46D7-B676-1BDD6EB8EFA6}
 		{AFE4A274-196C-433A-925D-66396DEFB770} = {2443BA35-A5DB-46D7-B676-1BDD6EB8EFA6}
+		{0A93205E-C0CC-4C7C-B770-5E8D90860DDF} = {36B33E68-DC91-4EFB-89CA-8A15FE94618C}
 	EndGlobalSection
 EndGlobal

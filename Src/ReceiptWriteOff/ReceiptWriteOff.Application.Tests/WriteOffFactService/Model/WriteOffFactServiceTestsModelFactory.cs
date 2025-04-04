@@ -20,11 +20,22 @@ public static class WriteOffFactServiceTestsModelFactory
         var writeOffFacts = fixture.CreateMany<WriteOffFact>(writeOffFactsCount).ToList();
         var writeOffFact = fixture.Freeze<WriteOffFact>();
 
-        var repositoryMock = fixture.Freeze<Mock<IWriteOffFactRepository>>();
-        repositoryMock.Setup(repo => repo.GetAllAsync(CancellationToken.None, false))
+        var writeOffFactRepositoryMock = fixture.Freeze<Mock<IWriteOffFactRepository>>();
+        writeOffFactRepositoryMock.Setup(repo => repo.GetAllAsync(CancellationToken.None, false))
             .ReturnsAsync(writeOffFacts);
-        repositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
+        writeOffFactRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), CancellationToken.None))
             .ReturnsAsync(writeOffFact);
+        
+        var bookInstanceRepositoryMock = fixture.Freeze<Mock<IBookInstanceRepository>>();
+        var writeOffReasonRepositoryMock = fixture.Freeze<Mock<IWriteOffReasonRepository>>();
+        
+        var writeOffFactUnitOfWorkMock = fixture.Freeze<Mock<IWriteOffFactUnitOfWork>>();
+        writeOffFactUnitOfWorkMock.Setup(uow => uow.WriteOffFactRepository)
+            .Returns(writeOffFactRepositoryMock.Object);
+        writeOffFactUnitOfWorkMock.Setup(uow => uow.BookInstanceRepository)
+            .Returns(bookInstanceRepositoryMock.Object);
+        writeOffFactUnitOfWorkMock.Setup(uow => uow.WriteOffReasonRepository)
+            .Returns(writeOffReasonRepositoryMock.Object);
 
         var writeOffFactDto = fixture.Freeze<WriteOffFactDto>();
         var registerWriteOffFactDto = fixture.Freeze<RegisterWriteOffFactDto>();
@@ -40,7 +51,10 @@ public static class WriteOffFactServiceTestsModelFactory
         return new WriteOffFactServiceTestsModel
         {
             Service = service,
-            RepositoryMock = repositoryMock,
+            WriteOffFactRepositoryMock = writeOffFactRepositoryMock,
+            BookInstanceRepositoryMock = bookInstanceRepositoryMock,
+            WriteOffReasonRepositoryMock = writeOffReasonRepositoryMock,
+            WriteOffFactUnitOfWorkMock = writeOffFactUnitOfWorkMock,
             MapperMock = mapperMock,
             WriteOffFacts = writeOffFacts,
             WriteOffFact = writeOffFact,

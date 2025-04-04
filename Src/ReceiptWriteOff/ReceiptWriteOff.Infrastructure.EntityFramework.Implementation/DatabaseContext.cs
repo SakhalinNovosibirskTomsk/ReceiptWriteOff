@@ -29,10 +29,17 @@ public class DatabaseContext : DbContext, IDatabaseContext
             .WithMany(b => b.BookInstances)
             .HasForeignKey(bi => bi.BookId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<BookInstance>()
+            .HasOne(bi => bi.ReceiptFact)
+            .WithOne(rf => rf.BookInstance)
+            .HasForeignKey<BookInstance>(bi => bi.ReceipdFactId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<ReceiptFact>()
             .HasOne(rf => rf.BookInstance)
             .WithOne(bi => bi.ReceiptFact)
+            .HasForeignKey<ReceiptFact>(receiptFact => receiptFact.BookInstanceId)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<WriteOffFact>()

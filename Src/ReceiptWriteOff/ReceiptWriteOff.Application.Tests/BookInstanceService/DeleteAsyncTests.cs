@@ -19,5 +19,8 @@ public class DeleteAsyncTests
         model.RepositoryMock.Verify(
             repo => repo.DeleteAsync(id, CancellationToken.None),
             Times.Once);
+        model.RepositoryMock.Verify(
+            repo => repo.SaveChangesAsync(CancellationToken.None),
+            Times.Once);
     }
 }

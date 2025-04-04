@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Moq;
 using ReceiptWriteOff.Application.Tests.BookService.Model;
 
@@ -16,15 +17,10 @@ public class RestoreFromArchiveAsyncTests
         await model.Service.RestoreFromArchiveAsync(id, CancellationToken.None);
 
         // Assert
-        model.BookArchiveRepositoryMock.Verify(
+        model.BookRepositoryMock.Verify(
             repo => repo.GetAsync(id, CancellationToken.None), 
             Times.Once);
-        model.BookArchiveRepositoryMock.Verify(
-            repo => repo.DeleteAsync(id, CancellationToken.None), 
-            Times.Once);
-        model.BookRepositoryMock.Verify(
-            repo => repo.AddAsync(model.Book, CancellationToken.None), 
-            Times.Once);
+        model.Book.IsArchived.Should().BeFalse();
         model.BookRepositoryMock.Verify(
             repo => repo.SaveChangesAsync(CancellationToken.None), 
             Times.Once);

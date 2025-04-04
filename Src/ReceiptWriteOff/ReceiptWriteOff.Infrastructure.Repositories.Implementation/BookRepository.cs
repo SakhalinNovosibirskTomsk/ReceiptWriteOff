@@ -14,11 +14,13 @@ public class BookRepository : EntityFrameworkRepository<Book, int>, IBookReposit
     {
     }
     
-    public BookRepository(
-        IDatabaseContext databaseContext,
-        string dbSetName,
-        IQueryableExtensionsWrapper<Book> queryableExtensionsWrapper) 
-        : base(databaseContext, dbSetName, queryableExtensionsWrapper)
+    public async Task<IEnumerable<Book>> GetAllAsync(
+        bool isArchived,
+        CancellationToken cancellationToken,
+        bool asNoTracking = false)
     {
+        var books = GetAll(asNoTracking);
+        var booksArchived = _queryableExtensionsWrapper.Where(books, b => b.IsArchived == isArchived);
+        return await _queryableExtensionsWrapper.ToListAsync(booksArchived, cancellationToken);
     }
 }

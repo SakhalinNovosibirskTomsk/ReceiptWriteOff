@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
@@ -11,9 +12,11 @@ using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 namespace ReceiptWriteOff.Infrastructure.EntityFramework.Migration.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250403054105_BookInstanceForeingKeyFix")]
+    partial class BookInstanceForeingKeyFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

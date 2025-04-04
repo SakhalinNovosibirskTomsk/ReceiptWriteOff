@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ReceiptWriteOff.Application.Contracts\ReceiptWriteOff.Application.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>

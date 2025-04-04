@@ -20,7 +20,8 @@ public class GetAsyncTests
 
         // Assert
         result.Should().BeEquivalentTo(model.WriteOffFactDto);
-        model.RepositoryMock.Verify(
+        model.WriteOffFactUnitOfWorkMock.Verify(uow => uow.WriteOffFactRepository, Times.Once);
+        model.WriteOffFactRepositoryMock.Verify(
             repo => repo.GetAsync(id, CancellationToken.None), 
             Times.Once);
         model.MapperMock.Verify(

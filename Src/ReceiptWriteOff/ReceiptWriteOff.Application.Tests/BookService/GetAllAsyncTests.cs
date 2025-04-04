@@ -22,7 +22,7 @@ public class GetAllAsyncTests
         // Assert
         result.Should().HaveCount(booksCount);
         model.BookRepositoryMock.Verify(
-            repo => repo.GetAllAsync(CancellationToken.None, false), 
+            repo => repo.GetAllAsync(true, CancellationToken.None, false), 
             Times.Once);
         model.MapperMock.Verify(
             mapper => mapper.Map<BookDto>(It.IsAny<Book>()),
@@ -43,7 +43,7 @@ public class GetAllAsyncTests
         // Assert
         result.Should().HaveCount(booksCount);
         model.BookRepositoryMock.Verify(
-            repo => repo.GetAllAsync(CancellationToken.None, false), 
+            repo => repo.GetAllAsync(false, CancellationToken.None, false),
             Times.Once);
         model.MapperMock.Verify(
             mapper => mapper.Map<BookDto>(It.IsAny<Book>()),
