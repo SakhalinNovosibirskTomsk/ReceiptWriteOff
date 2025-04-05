@@ -1,7 +1,9 @@
 using AutoMapper;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.WriteOffFact;
+using ReceiptWriteOff.Application.Implementations.Exceptions;
 using ReceiptWriteOff.Domain.Entities;
+using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 
 // ReSharper disable InconsistentNaming
@@ -28,6 +30,23 @@ public class WriteOffFactService(IWriteOffFactUnitOfWork _writeOffFactUnitOfWork
         RegisterWriteOffFactDto registerWriteOffFactDto, 
         CancellationToken cancellationToken)
     {
+        if(_writeOffFactUnitOfWork.WriteOffFactRepository.ContainsFactForBookInstance(
+               registerWriteOffFactDto.BookInstanceId))
+        {
+            throw new AlreadyExistsException(
+                $"Write-off fact already exists for this book instance with id={registerWriteOffFactDto.BookInstanceId}.");
+        }
+
+        var receiptFact = await _writeOffFactUnitOfWork.ReceiptFactRepository.GetAsync(
+            registerWriteOffFactDto.BookInstanceId, 
+            cancellationToken);
+
+        if (receiptFact.Date > registerWriteOffFactDto.Date)
+        {
+            throw new DateException(
+                $"Write-off fact date {registerWriteOffFactDto.Date} cannot be earlier than receipt fact date {receiptFact.Date}.");
+        }
+        
         var bookInstance = await _writeOffFactUnitOfWork.BookInstanceRepository.GetAsync(
             registerWriteOffFactDto.BookInstanceId, 
             cancellationToken);

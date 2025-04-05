@@ -27,4 +27,8 @@
       <ProjectReference Include="..\ReceiptWriteOff.Infrastructure.Repositories.Implementation\ReceiptWriteOff.Infrastructure.Repositories.Implementation.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="WriteOffFactRepository\Model\" />
+    </ItemGroup>
+
 </Project>

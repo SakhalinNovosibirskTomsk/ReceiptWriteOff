@@ -1,5 +1,4 @@
 using ReceiptWriteOff.Domain.Entities;
-using ReceiptWriteOff.Infrastructure.EntityFramework;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
@@ -11,4 +10,6 @@ public class WriteOffReasonRepository : EntityFrameworkRepository<WriteOffReason
     public WriteOffReasonRepository(IDatabaseContext databaseContext, IQueryableExtensionsWrapper<WriteOffReason> queryableExtensionsWrapper) : base(databaseContext, queryableExtensionsWrapper)
     {
     }
+
+    public bool ContainsWithDescription(string description) => _entitySet.Any(e => e.Description == description);
 }

@@ -2,6 +2,7 @@ using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using ReceiptWriteOff.Application.Abstractions;
     using ReceiptWriteOff.Application.Contracts.WriteOffFact;
+    using ReceiptWriteOff.Application.Implementations.Exceptions;
     using ReceiptWriteOff.Contracts.WriteOffFact;
     using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
     // ReSharper disable InconsistentNaming
@@ -52,10 +53,20 @@ using AutoMapper;
                 var writeOffFactResponse = _mapper.Map<WriteOffFactResponse>(writeOffFact);
                 return CreatedAtAction(nameof(GetAsync), new { id = writeOffFactResponse.Id }, writeOffFactResponse);
             }
+            catch (AlreadyExistsException e)
+            {
+                Console.WriteLine(e);
+                return Conflict(e.Message);
+            }
             catch (EntityNotFoundException e)
             {
                 Console.WriteLine(e);
-                return NotFound();
+                return NotFound(e.Message);
+            }
+            catch (DateException e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(e.Message);
             }
         }
     

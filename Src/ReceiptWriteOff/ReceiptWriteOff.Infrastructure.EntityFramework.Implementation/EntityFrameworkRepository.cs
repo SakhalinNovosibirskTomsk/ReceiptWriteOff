@@ -11,7 +11,7 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
     where TPrimaryKey : struct
 {
     private readonly IDatabaseContext _databaseContext;
-    private readonly IDbSet<TEntity> _entitySet;
+    protected readonly IDbSet<TEntity> _entitySet;
     protected readonly IQueryableExtensionsWrapper<TEntity> _queryableExtensionsWrapper;
     
     public EntityFrameworkRepository(
@@ -20,16 +20,6 @@ public class EntityFrameworkRepository<TEntity, TPrimaryKey> : IRepository<TEnti
     {
         _databaseContext = databaseContext;
         _entitySet = databaseContext.GetDbSet<TEntity>();
-        _queryableExtensionsWrapper = queryableExtensionsWrapper;
-    }
-    
-    public EntityFrameworkRepository(
-        IDatabaseContext databaseContext,
-        string dbSetName,
-        IQueryableExtensionsWrapper<TEntity> queryableExtensionsWrapper)
-    {
-        _databaseContext = databaseContext;
-        _entitySet = databaseContext.GetDbSet<TEntity>(dbSetName);
         _queryableExtensionsWrapper = queryableExtensionsWrapper;
     }
 

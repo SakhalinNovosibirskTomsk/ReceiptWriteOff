@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.ReceiptFact;
+using ReceiptWriteOff.Application.Implementations.Exceptions;
 using ReceiptWriteOff.Contracts.ReceiptFact;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
 // ReSharper disable InconsistentNaming
@@ -54,10 +55,18 @@ public class ReceiptFactController(IReceiptFactService _receiptFactService, IMap
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<ReceiptFactResponse>> RegisterAsync([FromBody] RegisterReceiptFactRequest request, CancellationToken cancellationToken)
     {
-        var registerReceiptFactDto = _mapper.Map<RegisterReceiptFactDto>(request);
-        var receiptFact = await _receiptFactService.RegisterAsync(registerReceiptFactDto, cancellationToken);
-        var receiptFactResponse = _mapper.Map<ReceiptFactResponse>(receiptFact);
-        return CreatedAtAction(nameof(GetAsync), new { id = receiptFactResponse.Id }, receiptFactResponse);
+        try
+        {
+            var registerReceiptFactDto = _mapper.Map<RegisterReceiptFactDto>(request);
+            var receiptFact = await _receiptFactService.RegisterAsync(registerReceiptFactDto, cancellationToken);
+            var receiptFactResponse = _mapper.Map<ReceiptFactResponse>(receiptFact);
+            return CreatedAtAction(nameof(GetAsync), new { id = receiptFactResponse.Id }, receiptFactResponse);
+        }
+        catch (AlreadyExistsException e)
+        {
+            Console.WriteLine(e);
+            return Conflict(e.Message);
+        }
     }
 
     /// <summary>

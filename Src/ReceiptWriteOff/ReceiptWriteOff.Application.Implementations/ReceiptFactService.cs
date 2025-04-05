@@ -1,6 +1,7 @@
 using AutoMapper;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.ReceiptFact;
+using ReceiptWriteOff.Application.Implementations.Exceptions;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 
@@ -25,6 +26,11 @@ public class ReceiptFactService(IReceiptFactRepository _receiptFactRepository, I
 
     public async Task<ReceiptFactDto> RegisterAsync(RegisterReceiptFactDto registerReceiptFactDto, CancellationToken cancellationToken)
     {
+        if (_receiptFactRepository.ContainsWithBookInventoryNumber(registerReceiptFactDto.InventoryNumber))
+        {
+            throw new AlreadyExistsException($"Book instance with inventory number {registerReceiptFactDto.InventoryNumber} already exists.");
+        }
+        
         var receiptFact = _mapper.Map<ReceiptFact>(registerReceiptFactDto);
         var bookInstance = _mapper.Map<BookInstance>(registerReceiptFactDto);
         

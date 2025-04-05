@@ -2,6 +2,7 @@ using AutoMapper;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.WriteOffFact;
 using ReceiptWriteOff.Application.Contracts.WriteOffReason;
+using ReceiptWriteOff.Application.Implementations.Exceptions;
 using ReceiptWriteOff.Domain.Entities;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;
 
@@ -37,6 +38,12 @@ public class WriteOffReasonService(IWriteOffReasonRepository _writeOffReasonRepo
 
     public async Task<WriteOffReasonDto> CreateAsync(CreateOrEditWriteOffReasonDto createOrEditWriteOffReasonDto, CancellationToken cancellationToken)
     {
+        if (_writeOffReasonRepository.ContainsWithDescription(createOrEditWriteOffReasonDto.Description))
+        {
+            throw new AlreadyExistsException(
+                $"WriteOffReason with description {createOrEditWriteOffReasonDto.Description} already exists");
+        }
+        
         var writeOffReason = _mapper.Map<WriteOffReason>(createOrEditWriteOffReasonDto);
         await _writeOffReasonRepository.AddAsync(writeOffReason, cancellationToken);
         await _writeOffReasonRepository.SaveChangesAsync(cancellationToken);

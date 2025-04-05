@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using ReceiptWriteOff.Domain.Entities;
-using ReceiptWriteOff.Infrastructure.EntityFramework;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation;
 using ReceiptWriteOff.Infrastructure.Repositories.Abstractions;

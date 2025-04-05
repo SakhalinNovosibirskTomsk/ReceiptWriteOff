@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ReceiptWriteOff.Application.Abstractions;
 using ReceiptWriteOff.Application.Contracts.WriteOffReason;
+using ReceiptWriteOff.Application.Implementations.Exceptions;
 using ReceiptWriteOff.Contracts.WriteOffFact;
 using ReceiptWriteOff.Contracts.WriteOffReason;
 using ReceiptWriteOff.Infrastructure.EntityFramework.Implementation.Exceptions;
@@ -68,10 +69,18 @@ public class WriteOffReasonController(IWriteOffReasonService _writeOffReasonServ
         [FromBody] CreateOrEditWriteOffReasonRequest request,
         CancellationToken cancellationToken)
     {
-        var createOrEditWriteOffReasonDto = _mapper.Map<CreateOrEditWriteOffReasonDto>(request);
-        var writeOffReason = await _writeOffReasonService.CreateAsync(createOrEditWriteOffReasonDto, cancellationToken);
-        var writeOffReasonResponse = _mapper.Map<WriteOffReasonResponse>(writeOffReason);
-        return CreatedAtAction(nameof(GetAsync), new { id = writeOffReasonResponse.Id }, writeOffReasonResponse);
+        try
+        {
+            var createOrEditWriteOffReasonDto = _mapper.Map<CreateOrEditWriteOffReasonDto>(request);
+            var writeOffReason = await _writeOffReasonService.CreateAsync(createOrEditWriteOffReasonDto, cancellationToken);
+            var writeOffReasonResponse = _mapper.Map<WriteOffReasonResponse>(writeOffReason);
+            return CreatedAtAction(nameof(GetAsync), new { id = writeOffReasonResponse.Id }, writeOffReasonResponse);
+        }
+        catch (AlreadyExistsException e)
+        {
+            Console.WriteLine(e);
+            return Conflict(e.Message);
+        }
     }
 
     [HttpPut("{id}")]
