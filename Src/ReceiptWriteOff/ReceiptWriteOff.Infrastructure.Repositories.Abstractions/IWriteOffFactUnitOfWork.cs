@@ -5,5 +5,5 @@ public interface IWriteOffFactUnitOfWork
     IBookInstanceRepository BookInstanceRepository { get; }
     IWriteOffFactRepository WriteOffFactRepository { get; }
     IWriteOffReasonRepository WriteOffReasonRepository { get; }
-    public IReceiptFactRepository ReceiptFactRepository { get; }
+    IReceiptFactRepository ReceiptFactRepository { get; }
 }

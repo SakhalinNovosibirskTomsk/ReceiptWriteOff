@@ -30,7 +30,8 @@ public class WriteOffFactService(IWriteOffFactUnitOfWork _writeOffFactUnitOfWork
         RegisterWriteOffFactDto registerWriteOffFactDto, 
         CancellationToken cancellationToken)
     {
-        if(_writeOffFactUnitOfWork.WriteOffFactRepository.ContainsFactForBookInstance(
+        var writeOffFactRepository = _writeOffFactUnitOfWork.WriteOffFactRepository;
+        if(writeOffFactRepository.ContainsFactForBookInstance(
                registerWriteOffFactDto.BookInstanceId))
         {
             throw new AlreadyExistsException(
@@ -58,8 +59,7 @@ public class WriteOffFactService(IWriteOffFactUnitOfWork _writeOffFactUnitOfWork
         var writeOffFact = _mapper.Map<WriteOffFact>(registerWriteOffFactDto);
         writeOffFact.BookInstance = bookInstance;
         writeOffFact.WriteOffReason = writeOffReason;
-
-        var writeOffFactRepository = _writeOffFactUnitOfWork.WriteOffFactRepository;
+        
         await writeOffFactRepository.AddAsync(writeOffFact, cancellationToken);
         await writeOffFactRepository.SaveChangesAsync(cancellationToken);
         return _mapper.Map<WriteOffFactDto>(writeOffFact);

@@ -18,4 +18,5 @@ public class WriteOffFactServiceTestsModel
     public required WriteOffFact WriteOffFact { get; set; }
     public required WriteOffFactDto WriteOffFactDto { get; set; }
     public required RegisterWriteOffFactDto RegisterWriteOffFactDto { get; set; }
+    public required ReceiptFact ReceiptFact { get; set; }
 }
