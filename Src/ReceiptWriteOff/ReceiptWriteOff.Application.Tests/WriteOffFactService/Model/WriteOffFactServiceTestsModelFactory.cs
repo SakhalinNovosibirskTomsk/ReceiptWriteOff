@@ -10,7 +10,10 @@ namespace ReceiptWriteOff.Application.Tests.WriteOffFactService.Model;
 
 public static class WriteOffFactServiceTestsModelFactory
 {
-    public static WriteOffFactServiceTestsModel Create(int writeOffFactsCount = 0)
+    public static WriteOffFactServiceTestsModel Create(
+        int writeOffFactsCount = 0,
+        bool factExists = false,
+        bool writeOffDateIsEarlier = false)
     {
         var fixture = new Fixture().Customize(new AutoMoqCustomization());
         fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
@@ -28,6 +31,7 @@ public static class WriteOffFactServiceTestsModelFactory
         
         var bookInstanceRepositoryMock = fixture.Freeze<Mock<IBookInstanceRepository>>();
         var writeOffReasonRepositoryMock = fixture.Freeze<Mock<IWriteOffReasonRepository>>();
+        var receiptFactRepositoryMock = fixture.Freeze<Mock<IReceiptFactRepository>>();
         
         var writeOffFactUnitOfWorkMock = fixture.Freeze<Mock<IWriteOffFactUnitOfWork>>();
         writeOffFactUnitOfWorkMock.Setup(uow => uow.WriteOffFactRepository)
@@ -36,9 +40,28 @@ public static class WriteOffFactServiceTestsModelFactory
             .Returns(bookInstanceRepositoryMock.Object);
         writeOffFactUnitOfWorkMock.Setup(uow => uow.WriteOffReasonRepository)
             .Returns(writeOffReasonRepositoryMock.Object);
+        writeOffFactUnitOfWorkMock.Setup(uow => uow.ReceiptFactRepository)
+            .Returns(receiptFactRepositoryMock.Object);
 
         var writeOffFactDto = fixture.Freeze<WriteOffFactDto>();
         var registerWriteOffFactDto = fixture.Freeze<RegisterWriteOffFactDto>();
+
+        if (factExists)
+        {
+            writeOffFactRepositoryMock.Setup(repo =>
+                    repo.ContainsFactForBookInstance(registerWriteOffFactDto.BookInstanceId))
+                .Returns(true);
+        }
+
+        var receiptFact = fixture.Freeze<ReceiptFact>();
+        if (writeOffDateIsEarlier)
+        {
+            registerWriteOffFactDto.Date = DateTime.Now;
+            receiptFact.Date = registerWriteOffFactDto.Date.Value.AddDays(1);
+            receiptFactRepositoryMock.Setup(rfr => rfr.GetAsync(
+                    registerWriteOffFactDto.BookInstanceId, CancellationToken.None))
+                .ReturnsAsync(receiptFact);
+        }
 
         var mapperMock = fixture.Freeze<Mock<IMapper>>();
         mapperMock.Setup(m => m.Map<WriteOffFactDto>(It.IsAny<WriteOffFact>()))
@@ -59,7 +82,8 @@ public static class WriteOffFactServiceTestsModelFactory
             WriteOffFacts = writeOffFacts,
             WriteOffFact = writeOffFact,
             WriteOffFactDto = writeOffFactDto,
-            RegisterWriteOffFactDto = registerWriteOffFactDto
+            RegisterWriteOffFactDto = registerWriteOffFactDto,
+            ReceiptFact = receiptFact
         };
     }
 }

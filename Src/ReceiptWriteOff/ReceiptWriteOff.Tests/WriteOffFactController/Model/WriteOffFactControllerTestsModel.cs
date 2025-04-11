@@ -1,7 +1,6 @@
 using AutoMapper;
 using Moq;
 using ReceiptWriteOff.Application.Abstractions;
-using ReceiptWriteOff.Application.Contracts.WriteOffFact;
 using ReceiptWriteOff.Contracts.WriteOffFact;
 
 namespace ReceiptWriteOff.Tests.WriteOffFactController.Model;
