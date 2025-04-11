@@ -10,7 +10,6 @@ COPY Src/ReceiptWriteOff/ReceiptWriteOff.Application.Settings ReceiptWriteOff.Ap
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Contracts ReceiptWriteOff.Contracts/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Domain.Entities ReceiptWriteOff.Domain.Entities/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Domain.Entities.Abstractions ReceiptWriteOff.Domain.Entities.Abstractions/
-COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework ReceiptWriteOff.Infrastructure.EntityFramework/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Implementation ReceiptWriteOff.Infrastructure.EntityFramework.Implementation/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Migration ReceiptWriteOff.Infrastructure.EntityFramework.Migration/
