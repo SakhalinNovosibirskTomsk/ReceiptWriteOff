@@ -25,6 +25,7 @@ jobs:
           ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
             cd /home/${USER}/receipt-writeoff-repo || git clone https://github.com/SakhalinNovosibirskTomsk/ReceiptWriteOff.git receipt-writeoff-repo && cd receipt-writeoff-repo
             git pull origin main
+            docker-compose -f workspace.docker-compose.yml -f application.docker-compose.yml down
             docker network create --driver=bridge --subnet=172.77.0.0/16 myLocalNetwork || true
             COMPOSE_CONVERT_WINDOWS_PATHS=1 docker-compose -f workspace.docker-compose.yml -f application.docker-compose.yml up --build -d
           EOF
