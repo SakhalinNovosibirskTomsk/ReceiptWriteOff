@@ -1,0 +1,30 @@
+name: Deploy to Remote Server
+
+on:
+  push:
+    branches:
+      - main # или ветка, из которой деплоишь
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via SSH
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd /home/${USER}/receipt-writeoff-repo || git clone https://github.com/yourusername/yourrepo.git receipt-writeoff-repo && cd receipt-writeoff-repo
+            git pull origin main
+            docker network create --driver=bridge --subnet=172.77.0.0/16 myLocalNetwork || true
+            COMPOSE_CONVERT_WINDOWS_PATHS=1 docker-compose -f workspace.docker-compose.yml -f application.docker-compose.yml up --build -d
+          EOF
