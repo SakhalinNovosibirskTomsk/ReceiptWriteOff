@@ -28,21 +28,49 @@ public class RegisterAsyncTests
             mapper => mapper.Map<RegisterWriteOffFactDto>(model.RegisterWriteOffFactRequest),
             Times.Once);
     }
-    
+
     [Fact]
-    public async Task RegisterAsync_ReturnsNotFound_WhenSomeEntityNotFound()
+    public async Task RegisterAsync_ReturnsConflict_WhenAlreadyExists()
     {
         // Arrange
-        int id = 1;
-        var model = WriteOffFactControllerTestsModelFactory.Create(writeOffFactExists: false);
+        var model = WriteOffFactControllerTestsModelFactory.Create(alreadyExistsOnRegister: true);
 
         // Act
         var result = await model.Controller.RegisterAsync(model.RegisterWriteOffFactRequest, CancellationToken.None);
 
         // Assert
-        result.Result.Should().BeOfType<NotFoundResult>();
-        model.ServiceMock.Verify(
-            service => service.RegisterAsync(It.IsAny<RegisterWriteOffFactDto>(), It.IsAny<CancellationToken>()),
-            Times.Once);
+        result.Result.Should().BeOfType<ConflictObjectResult>();
+        var conflictResult = (ConflictObjectResult)result.Result;
+        conflictResult.Value.Should().Be("WriteOffFact already exists");
+    }
+
+    [Fact]
+    public async Task RegisterAsync_ReturnsNotFound_WhenEntityNotFound()
+    {
+        // Arrange
+        var model = WriteOffFactControllerTestsModelFactory.Create(entityNotFoundOnRegister: true);
+
+        // Act
+        var result = await model.Controller.RegisterAsync(model.RegisterWriteOffFactRequest, CancellationToken.None);
+
+        // Assert
+        result.Result.Should().BeOfType<NotFoundObjectResult>();
+        var notFoundResult = (NotFoundObjectResult)result.Result;
+        notFoundResult.Value.Should().Be("Entity not found");
+    }
+
+    [Fact]
+    public async Task RegisterAsync_ReturnsBadRequest_WhenDateIsInvalid()
+    {
+        // Arrange
+        var model = WriteOffFactControllerTestsModelFactory.Create(invalidDateOnRegister: true);
+
+        // Act
+        var result = await model.Controller.RegisterAsync(model.RegisterWriteOffFactRequest, CancellationToken.None);
+
+        // Assert
+        result.Result.Should().BeOfType<BadRequestObjectResult>();
+        var badRequestResult = (BadRequestObjectResult)result.Result;
+        badRequestResult.Value.Should().Be("Invalid date");
     }
 }
