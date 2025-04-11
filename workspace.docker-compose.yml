@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+
+  portainer:
+    image: portainer/portainer
+    restart: always
+    command: --admin-password "$$2y$$05$$arC5e4UbRPxfR68jaFnAAe1aL7C1U03pqfyQh49/9lB9lqFxLfBqS" -H "unix:///var/run/docker.sock"
+    volumes:
+      - "//var/run/docker.sock:/var/run/docker.sock"
+    ports:
+      - "9000:9000"
+
+  postgres:
+    image: postgres
+    hostname: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8081 
+  
+volumes:
+  pg-data:
+  pg-admin:  
+
+networks:
+  default:
+    name: myLocalNetwork # создана извне: docker network create --driver=bridge myLocalNetwork
+    external: true
+    
