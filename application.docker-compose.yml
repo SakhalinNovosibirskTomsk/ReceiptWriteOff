@@ -8,7 +8,7 @@
       "ASPNETCORE_URLS": "http://+:5100"
       "ConnectionString": "Host=postgres;Port=5432;Database=receipt;UserId=postgres;Password=password"
     build:
-      context: ../
+      context: .
       dockerfile: Dockerfile
     ports:
       - "5101:5100"
