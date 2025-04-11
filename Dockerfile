@@ -14,7 +14,6 @@ COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework ReceiptW
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions ReceiptWriteOff.Infrastructure.EntityFramework.Abstractions/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Implementation ReceiptWriteOff.Infrastructure.EntityFramework.Implementation/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Migration ReceiptWriteOff.Infrastructure.EntityFramework.Migration/
-COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.EntityFramework.Migrations ReceiptWriteOff.Infrastructure.EntityFramework.Migrations/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.Repositories.Abstractions ReceiptWriteOff.Infrastructure.Repositories.Abstractions/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Infrastructure.Repositories.Implementation ReceiptWriteOff.Infrastructure.Repositories.Implementation/
 COPY Src/ReceiptWriteOff/ReceiptWriteOff.Mapping ReceiptWriteOff.Mapping/
