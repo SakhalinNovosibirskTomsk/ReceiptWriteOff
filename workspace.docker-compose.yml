@@ -16,7 +16,7 @@ services:
     hostname: postgres
     restart: always
     environment:
-      POSTGRES_DB: postgres
+      POSTGRES_DB: receipt
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
